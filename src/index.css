@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+@theme {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Light editorial palette: warm off-white ground, near-black ink,
+     a single deep-teal accent used sparingly. */
+  --color-background: #faf9f6;
+  --color-foreground: #1c1b17;
+  --color-muted-foreground: #6d6a60;
+  --color-faint: #a3a094;
+  --color-border: #e6e3da;
+  --color-card: #ffffff;
+  --color-primary: #0f766e;
+  --color-primary-foreground: #ffffff;
+  --color-accent-soft: #eef4f2;
+
+  --tracking-caps: 0.14em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+/* AnimateNumber's digit reel is taller than its visible glyph line. Anchor
+   the suffix unit to the reel's end, then lift it until its visible glyph
+   bottom aligns with the number rather than the reel's padded box. */
+.stat-value .number-section-post {
+  align-self: flex-end;
+  transform: translateY(-0.9em);
+}
+
+/* Mono metadata label: dates, tech tags, kickers. */
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
