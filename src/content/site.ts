@@ -6,8 +6,8 @@ export const site = {
   role: "Senior Software Engineer",
   location: "Charlotte, NC",
   email: "cmakohon@me.com",
-  // EDIT-ME: real profile URLs
-  github: "https://github.com/collinmakohon",
+  github: "https://github.com/cmakohon",
+  // EDIT-ME: real LinkedIn URL
   linkedin: "https://www.linkedin.com/in/collinmakohon",
   resumePdf: "/CollinMakohonResume2026.pdf",
   hero: {
