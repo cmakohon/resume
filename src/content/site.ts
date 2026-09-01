@@ -11,13 +11,13 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/collinmakohon",
   resumePdf: "/CollinMakohonResume2026.pdf",
   hero: {
-    headline: "Software engineer, nine years deep.",
+    headline: "I love solving problems for people.",
     subline:
-      "I ship production systems at agentic speed — without skipping the engineering. React and TypeScript on the surface, Kafka and Kubernetes underneath, and a decade of discipline in every pull request.",
+      "For nine-plus years, software has been how I do it. The tools keep changing (I do miss hunting for the perfect CSS property), but the goal hasn't: build things that make someone's day a little better.",
   },
-  // EDIT-ME: personal note + headshot at /public/headshot.jpg
+  // EDIT-ME: headshot at /public/headshot.jpg
   personalNote:
-    "Based in Charlotte, NC. When I'm not shipping software I'm usually exploring new tooling, mentoring engineers, or finding out what the latest model can really do under production constraints.",
+    "I'm a husband and a father, and I love spending time with my family — I've lived in Charlotte my whole life, and you'll find us at the White Water Center most warm weekends. Off the clock it's video games, playing music, Pokémon, 3D printing, fantasy football, and board games. I'm a perfectionist by nature, and I have a hard time turning my brain off when there's a problem left to solve.",
 } as const
 
 import type { NumberFormat } from "@/components/motion-ui/animated-number"

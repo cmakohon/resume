@@ -14,11 +14,12 @@ export function Footer() {
             href={`mailto:${site.email}`}
             className="max-w-fit text-balance text-4xl font-semibold tracking-tight transition-colors hover:text-accent-soft sm:text-6xl"
           >
-            Let's build something.
+            Let's solve something.
           </a>
           <p className="max-w-[44ch] text-sm leading-relaxed text-background/70">
-            Open to senior, staff, and lead engineering roles. The fastest way
-            to reach me is email — the resume has the rest.
+            Looking for Senior, Staff, or Lead roles with a team solving real
+            problems. Email is the fastest way to reach me — the resume has
+            the rest.
           </p>
         </div>
 
@@ -54,9 +55,15 @@ export function Footer() {
           </a>
         </div>
 
-        <p className="label-mono text-background/40">
-          © {year} {site.name} · {site.location}
-        </p>
+        <div className="flex flex-col gap-2">
+          <p className="label-mono text-background/40">
+            Every word here was written by a human. The site itself was built
+            with the agentic tooling it talks about.
+          </p>
+          <p className="label-mono text-background/40">
+            © {year} {site.name} · {site.location}
+          </p>
+        </div>
       </div>
     </FooterRevealFooter>
   )

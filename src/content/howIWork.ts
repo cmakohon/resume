@@ -1,7 +1,7 @@
-// The "How I work" section: agentic workflow framed as engineering process.
+// The "How I work" section: solving the user's problem first, agentic tooling as the how.
 
 export const workStatement =
-  "Agentic tools don't replace engineering judgment — they compound it. Nine years of production discipline goes into every spec, every prompt, and every review."
+  "Agentic tools level the playing field. Products still live or die on how well the people behind them understand the problem they're trying to solve."
 
 export interface WorkPrinciple {
   title: string
@@ -10,19 +10,19 @@ export interface WorkPrinciple {
 
 export const workPrinciples: WorkPrinciple[] = [
   {
-    title: "Spec before speed",
-    body: "Agents amplify whatever you hand them — including ambiguity. I write the requirements, constraints, and acceptance criteria first, the same way I'd brief an engineer. Clear specs are why my agentic work ships instead of stalling in rework.",
+    title: "Put yourself in the user's shoes",
+    body: "It's easy to paste story requirements into Claude, scroll on your phone, and glance over a multi-thousand-line PR before merging. The hard part is pausing to ask: does this feature solve the user's problem in the way that makes the most sense to them? That takes curiosity, humility, and creativity.",
   },
   {
-    title: "Tooling as a force multiplier",
-    body: "At Lowe's I championed AI-assisted development and built Snyk MCP automation workflows — then taught them to the broader team. Vulnerability resolution time dropped measurably. The win wasn't the tool; it was the workflow design around it.",
+    title: "Let AI do the boring parts",
+    body: "I'm a huge advocate for using AI at what it was designed for — understanding protocols, following established patterns, and grinding through repetitive tasks. At Lowe's I championed agentic workflows and taught them to the team, and vulnerability resolution time dropped measurably.",
   },
   {
-    title: "Review is non-negotiable",
-    body: "Generated code gets the same scrutiny as human code: PR review, tests, security scanning, performance checks. I've led frontend teams at a top-tier bank — the bar doesn't move because the author was a model.",
+    title: "Spend the savings on polish",
+    body: "Agentic tools should buy us time to dive deeper into user journeys and put a level of polish on features that wasn't reasonably attainable before. I care more about delighting users than winning arguments about the 'perfect' architecture — though I promise I can hold my own in those too.",
   },
   {
-    title: "Ship, verify, then trust",
-    body: "Velocity claims are cheap. A two-week concept-to-demo RFID POC and a production security platform delivered inside a fiscal year are what agentic speed looks like when it's grounded in delivery discipline.",
+    title: "Review like a human wrote it",
+    body: "Generated code gets the same scrutiny as anything else: PR review, tests, security scanning, performance checks. Technical knowledge and experience still matter — the absence of either comes back to bite you fast. The bar doesn't move because the author was a model.",
   },
 ]

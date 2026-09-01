@@ -8,6 +8,7 @@ import { About } from "@/sections/About"
 import { Footer } from "@/sections/Footer"
 import { Hero } from "@/sections/Hero"
 import { HowIWork } from "@/sections/HowIWork"
+import { LookingFor } from "@/sections/LookingFor"
 import { Skills } from "@/sections/Skills"
 import { Stats } from "@/sections/Stats"
 import { Timeline } from "@/sections/Timeline"
@@ -24,6 +25,7 @@ export default function App() {
             <HowIWork />
             <Skills />
             <About />
+            <LookingFor />
           </main>
         </FooterRevealContent>
         <Footer />
