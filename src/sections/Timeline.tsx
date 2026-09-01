@@ -84,10 +84,14 @@ function EraBlock({ era }: { era: TimelineEra }) {
     target: ref,
     offset: ["start end", "end start"],
   })
+  // Single array-keyframe hop onto a literal transform string keeps the
+  // parallax hardware-accelerated (ScrollTimeline/WAAPI).
   const projectDrift = useTransform(
     scrollYProgress,
     [0, 1],
-    parallaxAllowed ? [40, -40] : [0, 0]
+    parallaxAllowed
+      ? ["translateY(40px)", "translateY(-40px)"]
+      : ["translateY(0px)", "translateY(0px)"]
   )
 
   const personal = era.projects.every((project) => project.personal)
@@ -128,7 +132,7 @@ function EraBlock({ era }: { era: TimelineEra }) {
       {/* Project track. */}
       <motion.div
         className="flex flex-col gap-6 lg:pl-4"
-        style={{ y: calm || still ? undefined : projectDrift }}
+        style={{ transform: calm || still ? undefined : projectDrift }}
       >
         {era.projects.map((project) => (
           <ProjectCard key={project.id} project={project} />

@@ -22,17 +22,6 @@ function getWordProgressRange(index: number, count: number): WordProgressRange {
   return { start, end: Math.min(1, start + WORD_DURATION) }
 }
 
-function getWordOpacity(
-  progress: number,
-  { start, end }: WordProgressRange,
-  startOpacity = START_OPACITY
-): number {
-  if (progress <= start) return startOpacity
-  if (progress >= end) return 1
-  const wordProgress = (progress - start) / (end - start)
-  return startOpacity + (1 - startOpacity) * wordProgress
-}
-
 function Word({
   children,
   progress,
@@ -46,9 +35,14 @@ function Word({
   count: number
   reducedMotion: boolean
 }) {
-  const range = getWordProgressRange(index, count)
-  const opacity = useTransform(progress, (latest) =>
-    getWordOpacity(latest, range)
+  // Array-keyframe form (not function form) so each word's fade stays
+  // hardware-accelerated on the scroll timeline.
+  const { start, end } = getWordProgressRange(index, count)
+  const opacity = useTransform(
+    progress,
+    [start, end],
+    [START_OPACITY, 1],
+    { clamp: true }
   )
 
   return (
@@ -69,6 +63,11 @@ export function HowIWork() {
     target: stageRef,
     offset: ["start start", "end end"],
   })
+  const progressScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["scaleY(0)", "scaleY(1)"]
+  )
   const words = workStatement.split(" ")
 
   return (
@@ -90,7 +89,9 @@ export function HowIWork() {
             >
               <motion.span
                 className="absolute inset-0 block origin-top bg-foreground"
-                style={{ scaleY: reducedMotion ? 1 : scrollYProgress }}
+                style={{
+                  transform: reducedMotion ? undefined : progressScale,
+                }}
               />
             </div>
 

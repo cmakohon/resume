@@ -95,8 +95,8 @@ function StatRule() {
       ref={ref}
       aria-hidden="true"
       className="block h-[2px] w-7 origin-left bg-primary"
-      initial={motionAllowed ? { scaleX: 0 } : false}
-      animate={{ scaleX: revealed ? 1 : 0 }}
+      initial={motionAllowed ? { transform: "scaleX(0)" } : false}
+      animate={{ transform: revealed ? "scaleX(1)" : "scaleX(0)" }}
       transition={{ ...ui }}
     />
   )

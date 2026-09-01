@@ -11,7 +11,9 @@ export function Hero() {
   const ui = useMotionUITransition("ui")
   const [headlineComplete, setHeadlineComplete] = useState(false)
 
-  const enter = calm ? 0 : theme.travel.enter
+  // Literal transform strings keep these entrances compositor-driven.
+  const riseFrom = calm ? "none" : `translateY(${theme.travel.enter}px)`
+  const riseTo = "translateY(0px)"
 
   return (
     <section
@@ -21,8 +23,8 @@ export function Hero() {
       <div className="mx-auto flex w-full max-w-4xl flex-col items-start gap-8">
         <motion.p
           className="label-mono text-muted-foreground"
-          initial={still ? false : { opacity: 0, y: enter }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={still ? false : { opacity: 0, transform: riseFrom }}
+          animate={{ opacity: 1, transform: riseTo }}
           transition={{ ...ui }}
         >
           {site.name} · {site.location}
@@ -53,9 +55,11 @@ export function Hero() {
 
         <motion.div
           className="flex flex-wrap items-center gap-4 pt-2"
-          initial={still ? false : { opacity: 0, y: enter }}
+          initial={still ? false : { opacity: 0, transform: riseFrom }}
           animate={
-            headlineComplete || still ? { opacity: 1, y: 0 } : undefined
+            headlineComplete || still
+              ? { opacity: 1, transform: riseTo }
+              : undefined
           }
           transition={{ ...ui }}
         >

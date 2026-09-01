@@ -34,9 +34,14 @@ export function useReveal(): RevealVariants {
         transition: { staggerChildren: calm ? 0 : theme.stagger.base },
       },
     },
+    // Literal transform strings (not the y shorthand) so Motion can run the
+    // travel on the compositor via WAAPI.
     item: {
-      hidden: { opacity: 0, y: calm ? 0 : theme.travel.enter },
-      show: { opacity: 1, y: 0, transition: { ...ui } },
+      hidden: {
+        opacity: 0,
+        transform: calm ? "none" : `translateY(${theme.travel.enter}px)`,
+      },
+      show: { opacity: 1, transform: "translateY(0px)", transition: { ...ui } },
     },
   }
 }
