@@ -36,12 +36,14 @@ function Word({
   reducedMotion: boolean
 }) {
   // Array-keyframe form (not function form) so each word's fade stays
-  // hardware-accelerated on the scroll timeline.
+  // hardware-accelerated on the scroll timeline. The plateaus are spelled out
+  // as explicit keyframes: a bare [start, end] window survives the WAAPI
+  // scroll-timeline conversion with its offsets misapplied.
   const { start, end } = getWordProgressRange(index, count)
   const opacity = useTransform(
     progress,
-    [start, end],
-    [START_OPACITY, 1],
+    [0, start, end, 1],
+    [START_OPACITY, START_OPACITY, 1, 1],
     { clamp: true }
   )
 
@@ -123,33 +125,34 @@ export function HowIWork() {
         </div>
       </div>
 
-      {/* The practice behind the thesis. */}
-      <motion.div
-        className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-x-10 gap-y-12 px-6 pb-28 pt-4 sm:grid-cols-2 sm:px-10"
+      {/* The practice behind the thesis: a numbered essay list, not a feature grid. */}
+      <motion.ol
+        className="mx-auto w-full max-w-4xl list-none px-6 pb-28 pt-4 sm:px-10"
         variants={still ? undefined : container}
         initial={still ? false : "hidden"}
         whileInView={still ? undefined : "show"}
-        viewport={{ amount: 0.2, once: theme.inView.once }}
+        viewport={{ amount: 0.15, once: theme.inView.once }}
       >
-        {workPrinciples.map((principle) => (
-          <motion.article
+        {workPrinciples.map((principle, index) => (
+          <motion.li
             key={principle.title}
-            className="flex flex-col gap-3"
+            className="grid grid-cols-1 gap-3 border-t border-border py-10 first:border-t-0 first:pt-0 sm:grid-cols-[4rem_1fr] sm:gap-8"
             variants={item}
           >
-            <span
-              aria-hidden="true"
-              className="block h-[2px] w-7 bg-primary"
-            />
-            <h3 className="text-xl font-semibold tracking-tight">
-              {principle.title}
-            </h3>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {principle.body}
-            </p>
-          </motion.article>
+            <span aria-hidden="true" className="label-mono pt-1.5 text-faint">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <div className="flex flex-col gap-2">
+              <h3 className="text-xl font-semibold tracking-tight">
+                {principle.title}
+              </h3>
+              <p className="max-w-[62ch] text-sm leading-relaxed text-muted-foreground">
+                {principle.body}
+              </p>
+            </div>
+          </motion.li>
         ))}
-      </motion.div>
+      </motion.ol>
     </section>
   )
 }

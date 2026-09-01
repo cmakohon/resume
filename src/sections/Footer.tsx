@@ -12,7 +12,7 @@ export function Footer() {
           <p className="label-mono text-background/60">Get in touch</p>
           <a
             href={`mailto:${site.email}`}
-            className="max-w-fit text-balance text-4xl font-semibold tracking-tight transition-colors hover:text-accent-soft sm:text-6xl"
+            className="max-w-fit text-balance text-4xl font-semibold tracking-tight transition-colors hover:text-accent sm:text-6xl"
           >
             Let's solve something.
           </a>

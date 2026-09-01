@@ -15,6 +15,8 @@ export interface RevealVariants {
   container: Variants
   /** Fade-up child of a `container`. */
   item: Variants
+  /** Fade-in-from-left child of a `container`. */
+  itemLeft: Variants
 }
 
 /** Shared whileInView vocabulary: staggered fade-up entrances on the theme's tokens. */
@@ -42,6 +44,13 @@ export function useReveal(): RevealVariants {
         transform: calm ? "none" : `translateY(${theme.travel.enter}px)`,
       },
       show: { opacity: 1, transform: "translateY(0px)", transition: { ...ui } },
+    },
+    itemLeft: {
+      hidden: {
+        opacity: 0,
+        transform: calm ? "none" : `translateX(-${theme.travel.enter}px)`,
+      },
+      show: { opacity: 1, transform: "translateX(0px)", transition: { ...ui } },
     },
   }
 }

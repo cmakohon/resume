@@ -35,6 +35,7 @@ export function Hero() {
           id="hero-heading"
           ariaLabel={site.hero.headline}
           granularity="words"
+          hoverWave={1.5}
           delay={theme.motionMode === "full" ? 0.15 : 0}
           onRevealComplete={() => setHeadlineComplete(true)}
           className="max-w-[16ch] text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl"
@@ -89,7 +90,7 @@ export function Hero() {
       </div>
 
       <motion.a
-        href="#stats"
+        href="#timeline"
         aria-label="Scroll to content"
         className="label-mono absolute bottom-8 left-1/2 -translate-x-1/2 text-faint transition-colors hover:text-foreground"
         initial={still ? false : { opacity: 0 }}

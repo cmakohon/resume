@@ -1,5 +1,5 @@
 // The dual-track timeline: company eras on one track, the projects built
-// during each era on the other. Chronological, 2017 → now.
+// during each era on the other. Chronological, 2013 → now.
 
 export interface FeaturedStory {
   problem: string
@@ -21,16 +21,37 @@ export interface TimelineProject {
 
 export interface TimelineEra {
   id: string
+  /** Defaults to "work". Education eras render highlights, not project cards. */
+  kind?: "work" | "education"
   company: string
   role: string
   start: string
   end: string
   years: string
   summary: string
-  projects: TimelineProject[]
+  projects?: TimelineProject[]
+  /** Education-only: short lines that ride the project track without fake cards. */
+  highlights?: string[]
 }
 
 export const eras: TimelineEra[] = [
+  {
+    id: "unc",
+    kind: "education",
+    company: "UNC Chapel Hill",
+    role: "B.S. Computer Science",
+    start: "Aug 2013",
+    end: "May 2017",
+    years: "2013 — 2017",
+    summary:
+      "Where the problem-solving started getting formal. I went in curious and came out with a degree, a habit of asking what problem we're actually solving, and a permanent weakness for Carolina blue.",
+    // EDIT-ME: drafted in Collin's voice — confirm or replace with real UNC details.
+    highlights: [
+      "Learned pretty quickly that the hard part of programming was never the syntax — it was figuring out what the person asking actually needed.",
+      "Four years of building things for class, then rebuilding them at 2am because they could be better (the perfectionism predates the career).",
+      "Carolina blue has been my favorite color ever since — the accent on this site is not a coincidence.",
+    ],
+  },
   {
     id: "captech",
     company: "CapTech Ventures",

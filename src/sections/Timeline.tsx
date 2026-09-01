@@ -32,7 +32,7 @@ export function Timeline() {
         viewport={{ amount: theme.inView.amount, once: theme.inView.once }}
       >
         <motion.p className="label-mono text-primary" variants={item}>
-          2017 — Now
+          2013 — Now
         </motion.p>
         <motion.h2
           id="timeline-heading"
@@ -45,9 +45,9 @@ export function Timeline() {
           className="max-w-[56ch] text-base leading-relaxed text-muted-foreground"
           variants={item}
         >
-          One track for where I worked, one for what I was building at the
-          time. Featured projects carry the full story — problem, approach,
-          outcome.
+          It starts in Chapel Hill — one track for where I was, one for what I
+          was building at the time. Featured projects carry the full story:
+          problem, approach, outcome.
         </motion.p>
       </motion.header>
 
@@ -58,7 +58,7 @@ export function Timeline() {
           className="absolute left-[7px] top-0 h-full w-px bg-border lg:left-1/2"
         >
           <motion.div
-            className="absolute inset-0 origin-top bg-primary"
+            className="absolute inset-0 origin-top bg-accent"
             style={{ scaleY: still ? 1 : spineScale }}
           />
         </div>
@@ -94,18 +94,23 @@ function EraBlock({ era }: { era: TimelineEra }) {
       : ["translateY(0px)", "translateY(0px)"]
   )
 
-  const personal = era.projects.every((project) => project.personal)
+  const projects = era.projects ?? []
+  const education = era.kind === "education"
+  const personal =
+    !education &&
+    projects.length > 0 &&
+    projects.every((project) => project.personal)
 
   return (
     <div
       ref={ref}
       className="relative grid grid-cols-1 gap-8 pl-10 lg:grid-cols-2 lg:gap-x-20 lg:pl-0"
     >
-      {/* Era marker on the spine. */}
+      {/* Era marker on the spine: work filled, personal hollow, education pale. */}
       <span
         aria-hidden="true"
-        className={`absolute left-[7px] top-2 size-[15px] -translate-x-1/2 rounded-full border-2 border-primary lg:left-1/2 ${
-          personal ? "bg-background" : "bg-primary"
+        className={`absolute left-[7px] top-2 size-[15px] -translate-x-1/2 rounded-full border-2 border-accent lg:left-1/2 ${
+          education ? "bg-accent-soft" : personal ? "bg-background" : "bg-accent"
         }`}
       />
 
@@ -129,14 +134,27 @@ function EraBlock({ era }: { era: TimelineEra }) {
         </motion.div>
       </div>
 
-      {/* Project track. */}
+      {/* Project track — education eras carry plain highlights, no card chrome. */}
       <motion.div
-        className="flex flex-col gap-6 lg:pl-4"
+        className={`flex flex-col gap-6 lg:pl-4 ${education ? "lg:pt-2" : ""}`}
         style={{ transform: calm || still ? undefined : projectDrift }}
       >
-        {era.projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        {education
+          ? era.highlights?.map((highlight) => (
+              <motion.p
+                key={highlight}
+                className="max-w-[46ch] text-sm leading-relaxed text-muted-foreground"
+                variants={still ? undefined : item}
+                initial={still ? false : "hidden"}
+                whileInView={still ? undefined : "show"}
+                viewport={{ amount: 0.3, once: theme.inView.once }}
+              >
+                {highlight}
+              </motion.p>
+            ))
+          : projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
       </motion.div>
     </div>
   )

@@ -7,16 +7,18 @@
   --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* Light editorial palette: warm off-white ground, near-black ink,
-     a single deep-teal accent used sparingly. */
+     Carolina blue as the single accent — true Carolina for decorative
+     surfaces, a darker Carolina ink where text needs contrast. */
   --color-background: #faf9f6;
   --color-foreground: #1c1b17;
   --color-muted-foreground: #6d6a60;
   --color-faint: #a3a094;
   --color-border: #e6e3da;
   --color-card: #ffffff;
-  --color-primary: #0f766e;
+  --color-primary: #24689b;
   --color-primary-foreground: #ffffff;
-  --color-accent-soft: #eef4f2;
+  --color-accent: #4b9cd3;
+  --color-accent-soft: #e9f1f8;
 
   --tracking-caps: 0.14em;
 }
@@ -40,16 +42,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-primary);
-  color: var(--color-primary-foreground);
-}
-
-/* AnimateNumber's digit reel is taller than its visible glyph line. Anchor
-   the suffix unit to the reel's end, then lift it until its visible glyph
-   bottom aligns with the number rather than the reel's padded box. */
-.stat-value .number-section-post {
-  align-self: flex-end;
-  transform: translateY(-0.9em);
+  background: var(--color-accent);
+  color: var(--color-foreground);
 }
 
 /* Mono metadata label: dates, tech tags, kickers. */

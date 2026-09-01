@@ -19,19 +19,3 @@ export const site = {
   personalNote:
     "I'm a husband and a father, and I love spending time with my family — I've lived in Charlotte my whole life, and you'll find us at the White Water Center most warm weekends. Off the clock it's video games, playing music, Pokémon, 3D printing, fantasy football, and board games. I'm a perfectionist by nature, and I have a hard time turning my brain off when there's a problem left to solve.",
 } as const
-
-import type { NumberFormat } from "@/components/motion-ui/animated-number"
-
-export interface Stat {
-  label: string
-  value: number
-  suffix?: string
-  format?: NumberFormat
-}
-
-export const stats: Stat[] = [
-  { label: "Years shipping production software", value: 9, suffix: "+" },
-  { label: "Security analysts using my team's platform daily", value: 100, suffix: "+" },
-  { label: "Days from concept to live RFID demo", value: 14 },
-  { label: "Enterprise employers across fintech & retail", value: 4 },
-]

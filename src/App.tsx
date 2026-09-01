@@ -10,7 +10,6 @@ import { Hero } from "@/sections/Hero"
 import { HowIWork } from "@/sections/HowIWork"
 import { LookingFor } from "@/sections/LookingFor"
 import { Skills } from "@/sections/Skills"
-import { Stats } from "@/sections/Stats"
 import { Timeline } from "@/sections/Timeline"
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
         <FooterRevealContent>
           <main>
             <Hero />
-            <Stats />
             <Timeline />
             <HowIWork />
             <Skills />
