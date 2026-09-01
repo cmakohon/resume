@@ -32,20 +32,20 @@ export function Timeline() {
         viewport={{ amount: theme.inView.amount, once: theme.inView.once }}
       >
         <motion.p className="label-mono text-primary" variants={item}>
-          2013 — Now
+          2013–Now
         </motion.p>
         <motion.h2
           id="timeline-heading"
           className="max-w-[20ch] text-balance text-4xl font-semibold tracking-tight sm:text-5xl"
           variants={item}
         >
-          Two tracks, one career.
+          Where I've worked, and what I built there.
         </motion.h2>
         <motion.p
           className="max-w-[56ch] text-base leading-relaxed text-muted-foreground"
           variants={item}
         >
-          It starts in Chapel Hill — one track for where I was, one for what I
+          It starts in Chapel Hill. One track for where I was, one for what I
           was building at the time. Featured projects carry the full story:
           problem, approach, outcome.
         </motion.p>

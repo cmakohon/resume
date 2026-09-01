@@ -42,14 +42,14 @@ export const eras: TimelineEra[] = [
     role: "B.S. Computer Science",
     start: "Aug 2013",
     end: "May 2017",
-    years: "2013 — 2017",
+    years: "2013–2017",
     summary:
-      "Where the problem-solving started getting formal. I went in curious and came out with a degree, a habit of asking what problem we're actually solving, and a permanent weakness for Carolina blue.",
-    // EDIT-ME: drafted in Collin's voice — confirm or replace with real UNC details.
+      "Four years in Chapel Hill. It's where being curious about computers turned into something I could actually get paid for.",
+    // EDIT-ME: drafted in Collin's voice. Confirm or replace with real UNC details.
     highlights: [
-      "Learned pretty quickly that the hard part of programming was never the syntax — it was figuring out what the person asking actually needed.",
+      "Learned pretty quickly that the hard part of programming was never the syntax. It was figuring out what the person asking actually needed.",
       "Four years of building things for class, then rebuilding them at 2am because they could be better (the perfectionism predates the career).",
-      "Carolina blue has been my favorite color ever since — the accent on this site is not a coincidence.",
+      "Carolina blue has been my favorite color ever since. The accent on this site is not a coincidence.",
     ],
   },
   {
@@ -58,9 +58,9 @@ export const eras: TimelineEra[] = [
     role: "Senior Consultant / Developer Consultant",
     start: "Jul 2017",
     end: "Oct 2021",
-    years: "2017 — 2021",
+    years: "2017–2021",
     summary:
-      "Software development consulting across large financial and healthcare clients — designing tailored solutions from requirements through delivery.",
+      "Software development consulting for large financial and healthcare clients, designing tailored solutions from requirements through delivery.",
     projects: [
       {
         id: "deposit-exceptions",
@@ -91,7 +91,7 @@ export const eras: TimelineEra[] = [
     role: "Full Stack Developer",
     start: "Nov 2021",
     end: "Feb 2022",
-    years: "2021 — 2022",
+    years: "2021–2022",
     summary:
       "Full stack development on a next-generation global payments platform for The Bank of London.",
     projects: [
@@ -107,10 +107,10 @@ export const eras: TimelineEra[] = [
   {
     id: "bofa",
     company: "Bank of America",
-    role: "Vice President — Software Engineer III",
+    role: "Vice President, Software Engineer III",
     start: "Feb 2022",
     end: "Mar 2025",
-    years: "2022 — 2025",
+    years: "2022–2025",
     summary:
       "Led a team of frontend developers building security tooling; established frontend thought leadership through presentations, mentoring, and best-practice evangelism.",
     projects: [
@@ -122,11 +122,11 @@ export const eras: TimelineEra[] = [
         tech: ["React", "Tailwind CSS", "OpenShift", "CI/CD"],
         story: {
           problem:
-            "Security analysts needed a fast, reliable way to research and respond to network threats — and the existing on-prem proof of concept couldn't scale or ship safely.",
+            "Security analysts needed a fast, reliable way to research and respond to network threats, and the existing on-prem proof of concept couldn't scale or ship safely.",
           approach:
             "Led the frontend team end to end: React + Tailwind architecture, a fully containerized OpenShift deployment replacing manual releases, and a CI/CD pipeline that made every release consistent across environments.",
           outcome:
-            "Delivered to production within the fiscal year — recognized with a Platinum Award. 100+ analysts rely on it daily.",
+            "Delivered to production within the fiscal year and recognized with a Platinum Award. 100+ analysts rely on it daily.",
         },
       },
     ],
@@ -137,9 +137,9 @@ export const eras: TimelineEra[] = [
     role: "Senior Software Engineer",
     start: "Mar 2025",
     end: "Present",
-    years: "2025 — Now",
+    years: "2025–Now",
     summary:
-      "IoT and RFID innovation for retail at scale — POC velocity with production discipline, and the engineer who brought agentic tooling to the team.",
+      "IoT and RFID innovation for retail at scale. Fast POCs that still hold up to a real production review, and I'm the one who brought agentic tooling to the team.",
     projects: [
       {
         id: "rfid-poc",
@@ -149,11 +149,11 @@ export const eras: TimelineEra[] = [
         tech: ["React", "Kafka", "WebSockets", "Node.js"],
         story: {
           problem:
-            "Leadership needed to see whether RFID receiving could work in a real store bay — quickly enough to inform roadmap decisions.",
+            "Leadership needed to see whether RFID receiving could work in a real store bay, and they needed to see it in time for roadmap decisions.",
           approach:
-            "Independently designed the user flow, technical architecture, and demo experience: real-time EPC to UPC mapping, Kafka stream processing, item enrichment, and live visualization. Agentic tooling compressed the build without compressing the review bar.",
+            "Independently designed the user flow, technical architecture, and demo experience: real-time EPC to UPC mapping, Kafka stream processing, item enrichment, and live visualization. Agentic tooling made the build fast, and everything still went through normal review.",
           outcome:
-            "A fully functional POC inside two weeks of conceptualization — it directly influenced product roadmap decisions.",
+            "A fully functional POC inside two weeks of conceptualization, and it directly influenced product roadmap decisions.",
         },
       },
       {
@@ -164,9 +164,9 @@ export const eras: TimelineEra[] = [
         tech: ["React", "TypeScript", "REST"],
         story: {
           problem:
-            "Store configuration lived in a developer-only tool — every business change routed through engineering, creating support cycles that didn't need to exist.",
+            "Store configuration lived in a developer-only tool, so every business change routed through engineering and created support cycles that didn't need to exist.",
           approach:
-            "Rebuilt the UI around the business user: self-service configuration management with the guardrails that make self-service safe.",
+            "Rebuilt the UI around the business user: self-service configuration management, with enough guardrails that self-service was actually safe.",
           outcome:
             "Business users manage store configurations independently; support cycles dropped accordingly.",
         },
@@ -179,7 +179,7 @@ export const eras: TimelineEra[] = [
         tech: ["BabylonJS", "React", "Canvas"],
         story: {
           problem:
-            "The team's RFID lab work was blocked on visualization — no way to see tag reads in space meant no way to explore new use cases.",
+            "The team's RFID lab work was blocked on visualization. With no way to see tag reads in space, there was no way to explore new use cases.",
           approach:
             "Integrated BabylonJS digital twins into multiple IoT POCs and built a bespoke 2D spatial visualization tool from scratch for lab testing.",
           outcome:
@@ -201,15 +201,15 @@ export const eras: TimelineEra[] = [
     role: "Personal projects",
     start: "2025",
     end: "Present",
-    years: "2025 — Now",
+    years: "2025–Now",
     summary:
-      "Public work built nights and weekends — the same discipline, my own roadmap.",
+      "Public work built nights and weekends, on my own roadmap.",
     projects: [
       // EDIT-ME: replace placeholders with real personal projects (name, summary, tech, link)
       {
         id: "personal-1",
         title: "Personal project one",
-        summary: "Placeholder — details coming from Collin.",
+        summary: "Placeholder. Details coming from Collin.",
         tech: ["TBD"],
         personal: true,
         link: "https://github.com/",
@@ -217,7 +217,7 @@ export const eras: TimelineEra[] = [
       {
         id: "personal-2",
         title: "Personal project two",
-        summary: "Placeholder — details coming from Collin.",
+        summary: "Placeholder. Details coming from Collin.",
         tech: ["TBD"],
         personal: true,
         link: "https://github.com/",

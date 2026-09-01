@@ -17,5 +17,5 @@ export const site = {
   },
   // EDIT-ME: headshot at /public/headshot.jpg
   personalNote:
-    "I'm a husband and a father, and I love spending time with my family — I've lived in Charlotte my whole life, and you'll find us at the White Water Center most warm weekends. Off the clock it's video games, playing music, Pokémon, 3D printing, fantasy football, and board games. I'm a perfectionist by nature, and I have a hard time turning my brain off when there's a problem left to solve.",
+    "I'm a husband and a father, and I love spending time with my family. I've lived in Charlotte my whole life, and you'll find us at the White Water Center most warm weekends. Off the clock it's video games, playing music, Pokémon, 3D printing, fantasy football, and board games. I'm a perfectionist by nature, and I have a hard time turning my brain off when there's a problem left to solve.",
 } as const

@@ -14,12 +14,12 @@ export function Footer() {
             href={`mailto:${site.email}`}
             className="max-w-fit text-balance text-4xl font-semibold tracking-tight transition-colors hover:text-accent sm:text-6xl"
           >
-            Let's solve something.
+            Let's talk.
           </a>
           <p className="max-w-[44ch] text-sm leading-relaxed text-background/70">
             Looking for Senior, Staff, or Lead roles with a team solving real
-            problems. Email is the fastest way to reach me — the resume has
-            the rest.
+            problems. Email is the fastest way to reach me. The resume has the
+            rest.
           </p>
         </div>
 
