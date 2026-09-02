@@ -10,6 +10,15 @@ export const site = {
   // EDIT-ME: real LinkedIn URL
   linkedin: "https://www.linkedin.com/in/collinmakohon",
   resumePdf: "/CollinMakohonResume2026.pdf",
+  /** Header jump links. Each `id` matches a section's DOM id. */
+  nav: [
+    { id: "timeline", label: "Work" },
+    { id: "how-i-work", label: "How I work" },
+    { id: "skills", label: "Toolbox" },
+    { id: "about", label: "About" },
+    { id: "looking-for", label: "Looking for" },
+    { id: "contact", label: "Contact" },
+  ],
   hero: {
     headline: "I love solving problems for people.",
     deck: "Senior software engineer. Banking, healthcare, and now retail.",

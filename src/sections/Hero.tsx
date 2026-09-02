@@ -17,6 +17,7 @@ export function Hero() {
 
   return (
     <section
+      id="top"
       className="relative flex min-h-svh w-full flex-col justify-center overflow-x-clip px-6 py-24 sm:px-10"
       aria-labelledby="hero-heading"
     >
@@ -28,7 +29,7 @@ export function Hero() {
           transition={{ ...ui }}
         >
           <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
-          {site.name} · {site.location}
+          {site.location}
         </motion.p>
 
         {/* Headline and deck read as one block, so they sit tighter than the section gap. */}

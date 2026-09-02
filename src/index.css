@@ -27,6 +27,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Clear the fixed banner when a nav jump lands on a section. */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
