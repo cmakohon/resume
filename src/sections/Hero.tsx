@@ -8,12 +8,31 @@ export function Hero() {
   const theme = useMotionUITheme()
   const still = theme.motionMode === "off"
   const calm = theme.motionMode === "calm"
-  const ui = useMotionUITransition("ui")
-  const [headlineComplete, setHeadlineComplete] = useState(false)
+  const gentle = useMotionUITransition("gentle")
+  const full = theme.motionMode === "full"
+  const [headlineStarted, setHeadlineStarted] = useState(false)
 
   // Literal transform strings keep these entrances compositor-driven.
   const riseFrom = calm ? "none" : `translateY(${theme.travel.enter}px)`
   const riseTo = "translateY(0px)"
+  const rise = { opacity: 1, transform: riseTo }
+
+  // One cascade, one spring. The headline words start rising at
+  // HEADLINE_DELAY and the last one lifts off around 0.45s; everything else
+  // joins while those last words are still landing, on the same gentle
+  // spring, so the hero reads as a single gesture rather than a headline
+  // followed by an afterthought. Offsets are seconds after the headline's
+  // entrance actually begins (fonts ready), not after mount.
+  const HEADLINE_DELAY = full ? 0.15 : 0
+  const follow = (offset: number) => ({
+    ...gentle,
+    delay: full ? offset : 0,
+  })
+  const DECK_AT = 0.4
+  const SUBLINE_AT = 0.5
+  const ACTIONS_AT = 0.6
+  const CREDENTIALS_AT = 0.7
+  const SCROLL_AT = 1.0
 
   return (
     <section
@@ -25,8 +44,8 @@ export function Hero() {
         <motion.p
           className="label-mono flex items-center gap-3 text-muted-foreground"
           initial={still ? false : { opacity: 0, transform: riseFrom }}
-          animate={{ opacity: 1, transform: riseTo }}
-          transition={{ ...ui }}
+          animate={rise}
+          transition={gentle}
         >
           <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
           {site.location}
@@ -40,8 +59,8 @@ export function Hero() {
             ariaLabel={site.hero.headline}
             granularity="words"
             hoverWave={1.5}
-            delay={theme.motionMode === "full" ? 0.15 : 0}
-            onRevealComplete={() => setHeadlineComplete(true)}
+            delay={HEADLINE_DELAY}
+            onRevealStart={() => setHeadlineStarted(true)}
             className="max-w-[16ch] text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl"
           >
             {site.hero.headline}
@@ -50,12 +69,8 @@ export function Hero() {
           <motion.p
             className="text-balance text-xl font-medium leading-snug tracking-tight sm:text-2xl"
             initial={still ? false : { opacity: 0, transform: riseFrom }}
-            animate={
-              headlineComplete || still
-                ? { opacity: 1, transform: riseTo }
-                : undefined
-            }
-            transition={{ ...ui }}
+            animate={headlineStarted || still ? rise : undefined}
+            transition={follow(DECK_AT)}
           >
             {site.hero.deck}
           </motion.p>
@@ -66,7 +81,8 @@ export function Hero() {
           as="p"
           ariaHidden
           granularity="lines"
-          start={headlineComplete}
+          start={headlineStarted}
+          delay={full ? SUBLINE_AT : 0}
           className="max-w-[52ch] text-balance text-lg leading-relaxed text-muted-foreground"
         >
           {site.hero.subline}
@@ -75,12 +91,8 @@ export function Hero() {
         <motion.div
           className="flex flex-wrap items-center gap-4 pt-2"
           initial={still ? false : { opacity: 0, transform: riseFrom }}
-          animate={
-            headlineComplete || still
-              ? { opacity: 1, transform: riseTo }
-              : undefined
-          }
-          transition={{ ...ui }}
+          animate={headlineStarted || still ? rise : undefined}
+          transition={follow(ACTIONS_AT)}
         >
           <a
             href="#timeline"
@@ -109,12 +121,8 @@ export function Hero() {
         <motion.ul
           className="label-mono flex list-none flex-wrap items-center gap-x-3 gap-y-2 p-0 text-faint"
           initial={still ? false : { opacity: 0, transform: riseFrom }}
-          animate={
-            headlineComplete || still
-              ? { opacity: 1, transform: riseTo }
-              : undefined
-          }
-          transition={{ ...ui, delay: theme.motionMode === "full" ? 0.1 : 0 }}
+          animate={headlineStarted || still ? rise : undefined}
+          transition={follow(CREDENTIALS_AT)}
         >
           {site.hero.credentials.map((credential, index) => (
             <li key={credential} className="flex items-center gap-3">
@@ -134,8 +142,8 @@ export function Hero() {
         aria-label="Scroll to content"
         className="label-mono absolute bottom-8 left-1/2 -translate-x-1/2 text-faint transition-colors hover:text-primary"
         initial={still ? false : { opacity: 0 }}
-        animate={headlineComplete || still ? { opacity: 1 } : undefined}
-        transition={{ ...ui, delay: 0.3 }}
+        animate={headlineStarted || still ? { opacity: 1 } : undefined}
+        transition={follow(SCROLL_AT)}
       >
         Scroll
       </motion.a>

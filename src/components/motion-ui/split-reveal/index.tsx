@@ -31,9 +31,20 @@ export interface SplitRevealProps {
   delay?: number
   /** Whether this reveal may start. Defaults to `true`. */
   start?: boolean
+  /**
+   * Called once when the entrance actually begins (fonts ready, text split,
+   * first unit in motion). Choreograph companions from this, not from
+   * `onRevealComplete`: springs settle well after they look finished.
+   */
+  onRevealStart?: VoidFunction
   /** Called once after every entrance unit has settled. */
   onRevealComplete?: VoidFunction
-  /** Hover wave amplitude as a multiplier on `travel.hover`. Omit for no wave. */
+  /**
+   * Hover wave amplitude as a multiplier on `travel.hover`. Omit for no wave.
+   * The wave only arms once the entrance has settled: it animates the same
+   * transforms, and interrupting an in-flight entrance would stop it without
+   * ever resolving its promise.
+   */
   hoverWave?: number
   /** Hover bounce duration multiplier on the `ambient` token. Defaults to `1`. */
   hoverWaveDuration?: number
@@ -56,6 +67,7 @@ export function SplitReveal({
   as = "p",
   delay = 0,
   start = true,
+  onRevealStart,
   onRevealComplete,
   hoverWave,
   hoverWaveDuration = 1,
@@ -77,10 +89,12 @@ export function SplitReveal({
   const gentleRef = useRef(gentle)
   const ambientRef = useRef(ambient)
   const themeRef = useRef(theme)
+  const onRevealStartRef = useRef(onRevealStart)
   const onRevealCompleteRef = useRef(onRevealComplete)
   gentleRef.current = gentle
   ambientRef.current = ambient
   themeRef.current = theme
+  onRevealStartRef.current = onRevealStart
   onRevealCompleteRef.current = onRevealComplete
 
   useLayoutEffect(() => {
@@ -95,7 +109,13 @@ export function SplitReveal({
     }
 
     let cancelled = false
+    let started = false
     let completed = false
+    const notifyRevealStart = () => {
+      if (cancelled || started) return
+      started = true
+      onRevealStartRef.current?.()
+    }
     const notifyRevealComplete = () => {
       if (cancelled || completed) return
       completed = true
@@ -103,6 +123,7 @@ export function SplitReveal({
     }
 
     if (mode === "off") {
+      notifyRevealStart()
       notifyRevealComplete()
       return
     }
@@ -112,6 +133,7 @@ export function SplitReveal({
     const gentleTransition = gentleRef.current
     const animations: ReturnType<typeof animate>[] = []
     let detachHover: VoidFunction | undefined
+    let settleTimer: ReturnType<typeof setTimeout> | undefined
 
     document.fonts.ready.then(() => {
       const node = ref.current
@@ -140,6 +162,7 @@ export function SplitReveal({
       })
 
       node.style.visibility = "visible"
+      notifyRevealStart()
 
       if (mode === "calm") {
         const animation = animate(
@@ -192,9 +215,8 @@ export function SplitReveal({
         )
       }
 
-      void Promise.all(animations).then(notifyRevealComplete, () => {})
-
-      if (hoverWave && revealUnits.length > 0) {
+      const armHoverWave = () => {
+        if (cancelled || detachHover || !hoverWave || revealUnits.length === 0) return
         const amplitude = themeTokens.travel.hover * hoverWave
         const ambient = ambientRef.current
         const waveDuration = ambient.duration * hoverWaveDuration
@@ -221,10 +243,37 @@ export function SplitReveal({
           )
         })
       }
+
+      const settle = () => {
+        if (settleTimer !== undefined) clearTimeout(settleTimer)
+        notifyRevealComplete()
+        armHoverWave()
+      }
+
+      void Promise.all(animations).then(settle, () => {})
+
+      // Safety net: a stopped native animation never resolves its promise, so
+      // settle on the clock too. Generous on purpose; it only matters when the
+      // promise path has already gone quiet.
+      const unitCount =
+        granularity === "lines" ? lines.length : revealUnits.length
+      const staggerStep =
+        granularity === "lines"
+          ? themeTokens.stagger.relaxed
+          : granularity === "words"
+            ? themeTokens.stagger.base
+            : themeTokens.stagger.tight
+      const settleAfter =
+        delay +
+        staggerStep * Math.max(0, unitCount - 1) +
+        gentleTransition.duration * 2 +
+        0.25
+      settleTimer = setTimeout(settle, settleAfter * 1000)
     })
 
     return () => {
       cancelled = true
+      if (settleTimer !== undefined) clearTimeout(settleTimer)
       detachHover?.()
       animations.forEach((animation) => animation.stop())
       const node = ref.current
