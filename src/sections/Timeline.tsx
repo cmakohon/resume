@@ -96,21 +96,17 @@ function EraBlock({ era }: { era: TimelineEra }) {
 
   const projects = era.projects ?? []
   const education = era.kind === "education"
-  const personal =
-    !education &&
-    projects.length > 0 &&
-    projects.every((project) => project.personal)
 
   return (
     <div
       ref={ref}
       className="relative grid grid-cols-1 gap-8 pl-10 lg:grid-cols-2 lg:gap-x-20 lg:pl-0"
     >
-      {/* Era marker on the spine: work filled, personal hollow, education pale. */}
+      {/* Era marker on the spine: work filled, education pale. */}
       <span
         aria-hidden="true"
         className={`absolute left-[7px] top-2 size-[15px] -translate-x-1/2 rounded-full border-2 border-accent lg:left-1/2 ${
-          education ? "bg-accent-soft" : personal ? "bg-background" : "bg-accent"
+          education ? "bg-accent-soft" : "bg-accent"
         }`}
       />
 
@@ -166,21 +162,18 @@ function ProjectCard({ project }: { project: TimelineProject }) {
 
   return (
     <motion.article
-      className={`rounded-xl border bg-card p-6 sm:p-7 ${
-        project.personal ? "border-dashed border-faint" : "border-border"
-      } ${featured ? "shadow-[0_1px_2px_rgba(28,27,23,0.04),0_8px_24px_-12px_rgba(28,27,23,0.12)]" : ""}`}
+      className={`rounded-xl border border-border bg-card p-6 sm:p-7 ${
+        featured
+          ? "shadow-[0_1px_2px_rgba(28,27,23,0.04),0_8px_24px_-12px_rgba(28,27,23,0.12)]"
+          : ""
+      }`}
       variants={still ? undefined : item}
       initial={still ? false : "hidden"}
       whileInView={still ? undefined : "show"}
       viewport={{ amount: 0.3, once: theme.inView.once }}
     >
       <div className="flex flex-col gap-3">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          {featured && <span className="label-mono text-primary">Featured</span>}
-          {project.personal && (
-            <span className="label-mono text-muted-foreground">Personal</span>
-          )}
-        </div>
+        {featured && <span className="label-mono text-primary">Featured</span>}
         <h4 className="text-xl font-semibold tracking-tight">
           {project.link ? (
             <a

@@ -10,6 +10,7 @@ import { Header } from "@/sections/Header"
 import { Hero } from "@/sections/Hero"
 import { HowIWork } from "@/sections/HowIWork"
 import { LookingFor } from "@/sections/LookingFor"
+import { Projects } from "@/sections/Projects"
 import { Skills } from "@/sections/Skills"
 import { Timeline } from "@/sections/Timeline"
 
@@ -23,6 +24,7 @@ export default function App() {
           <main>
             <Hero />
             <Timeline />
+            <Projects />
             <HowIWork />
             <Skills />
             <About />

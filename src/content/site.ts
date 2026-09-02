@@ -13,6 +13,7 @@ export const site = {
   /** Header jump links. Each `id` matches a section's DOM id. */
   nav: [
     { id: "timeline", label: "Work" },
+    { id: "projects", label: "Projects" },
     { id: "how-i-work", label: "How I work" },
     { id: "skills", label: "Toolbox" },
     { id: "about", label: "About" },

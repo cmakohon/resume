@@ -12,8 +12,6 @@ export interface TimelineProject {
   title: string
   summary: string
   tech: string[]
-  /** Personal projects render on their own visual track. */
-  personal?: boolean
   /** Featured projects get the full problem → approach → outcome treatment. */
   story?: FeaturedStory
   link?: string
@@ -192,35 +190,6 @@ export const eras: TimelineEra[] = [
         summary:
           "Sole UI developer modernizing a mainframe workflow; ran a half-day war room with stakeholders, and early demos drew praise from the Senior PM and VP.",
         tech: ["React", "TypeScript"],
-      },
-    ],
-  },
-  {
-    id: "independent",
-    company: "Independent work",
-    role: "Personal projects",
-    start: "2025",
-    end: "Present",
-    years: "2025–Now",
-    summary:
-      "Public work built nights and weekends, on my own roadmap.",
-    projects: [
-      // EDIT-ME: replace placeholders with real personal projects (name, summary, tech, link)
-      {
-        id: "personal-1",
-        title: "Personal project one",
-        summary: "Placeholder. Details coming from Collin.",
-        tech: ["TBD"],
-        personal: true,
-        link: "https://github.com/",
-      },
-      {
-        id: "personal-2",
-        title: "Personal project two",
-        summary: "Placeholder. Details coming from Collin.",
-        tech: ["TBD"],
-        personal: true,
-        link: "https://github.com/",
       },
     ],
   },

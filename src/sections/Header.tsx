@@ -65,7 +65,7 @@ export function Header() {
             {site.nav.map((item) => (
               <li
                 key={item.id}
-                className={item.id === "contact" ? undefined : "hidden md:block"}
+                className={item.id === "contact" ? undefined : "hidden lg:block"}
               >
                 <a
                   href={`#${item.id}`}
