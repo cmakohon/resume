@@ -12,8 +12,11 @@ export const site = {
   resumePdf: "/CollinMakohonResume2026.pdf",
   hero: {
     headline: "I love solving problems for people.",
+    deck: "Senior software engineer. Banking, healthcare, and now retail.",
     subline:
       "For nine-plus years, software has been how I do it. The tools keep changing (I do miss hunting for the perfect CSS property), but the goal hasn't: build things that make someone's day a little better.",
+    /** Mono credential strip under the calls to action. Chronological. */
+    credentials: ["9+ years", "CapTech", "Bank of America", "Lowe's"],
   },
   // EDIT-ME: headshot at /public/headshot.jpg
   personalNote:

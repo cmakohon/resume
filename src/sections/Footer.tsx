@@ -9,7 +9,10 @@ export function Footer() {
     <FooterRevealFooter className="bg-foreground text-background">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-20 sm:px-10 sm:py-24">
         <div className="flex flex-col gap-6">
-          <p className="label-mono text-background/60">Get in touch</p>
+          <p className="label-mono flex items-center gap-3 text-accent">
+            <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
+            Get in touch
+          </p>
           <a
             href={`mailto:${site.email}`}
             className="max-w-fit text-balance text-4xl font-semibold tracking-tight transition-colors hover:text-accent sm:text-6xl"
@@ -26,7 +29,7 @@ export function Footer() {
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
           <a
             href={`mailto:${site.email}`}
-            className="label-mono text-background/80 transition-colors hover:text-background"
+            className="label-mono text-background/80 transition-colors hover:text-accent"
           >
             {site.email}
           </a>
@@ -34,7 +37,7 @@ export function Footer() {
             href={site.github}
             target="_blank"
             rel="noreferrer"
-            className="label-mono text-background/80 transition-colors hover:text-background"
+            className="label-mono text-background/80 transition-colors hover:text-accent"
           >
             GitHub
           </a>
@@ -42,14 +45,14 @@ export function Footer() {
             href={site.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="label-mono text-background/80 transition-colors hover:text-background"
+            className="label-mono text-background/80 transition-colors hover:text-accent"
           >
             LinkedIn
           </a>
           <a
             href={site.resumePdf}
             download
-            className="label-mono text-background/80 transition-colors hover:text-background"
+            className="label-mono text-background/80 transition-colors hover:text-accent"
           >
             Resume (PDF)
           </a>

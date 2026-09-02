@@ -22,26 +22,43 @@ export function Hero() {
     >
       <div className="mx-auto flex w-full max-w-4xl flex-col items-start gap-8">
         <motion.p
-          className="label-mono text-muted-foreground"
+          className="label-mono flex items-center gap-3 text-muted-foreground"
           initial={still ? false : { opacity: 0, transform: riseFrom }}
           animate={{ opacity: 1, transform: riseTo }}
           transition={{ ...ui }}
         >
+          <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
           {site.name} · {site.location}
         </motion.p>
 
-        <SplitReveal
-          as="h1"
-          id="hero-heading"
-          ariaLabel={site.hero.headline}
-          granularity="words"
-          hoverWave={1.5}
-          delay={theme.motionMode === "full" ? 0.15 : 0}
-          onRevealComplete={() => setHeadlineComplete(true)}
-          className="max-w-[16ch] text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl"
-        >
-          {site.hero.headline}
-        </SplitReveal>
+        {/* Headline and deck read as one block, so they sit tighter than the section gap. */}
+        <div className="flex flex-col gap-5">
+          <SplitReveal
+            as="h1"
+            id="hero-heading"
+            ariaLabel={site.hero.headline}
+            granularity="words"
+            hoverWave={1.5}
+            delay={theme.motionMode === "full" ? 0.15 : 0}
+            onRevealComplete={() => setHeadlineComplete(true)}
+            className="max-w-[16ch] text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl"
+          >
+            {site.hero.headline}
+          </SplitReveal>
+
+          <motion.p
+            className="text-balance text-xl font-medium leading-snug tracking-tight sm:text-2xl"
+            initial={still ? false : { opacity: 0, transform: riseFrom }}
+            animate={
+              headlineComplete || still
+                ? { opacity: 1, transform: riseTo }
+                : undefined
+            }
+            transition={{ ...ui }}
+          >
+            {site.hero.deck}
+          </motion.p>
+        </div>
 
         <p className="sr-only">{site.hero.subline}</p>
         <SplitReveal
@@ -66,33 +83,55 @@ export function Hero() {
         >
           <a
             href="#timeline"
-            className="rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-primary"
+            className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-foreground"
           >
             View the work ↓
           </a>
           <a
             href={site.resumePdf}
             download
-            className="rounded-full border border-border bg-card px-6 py-3 text-sm font-medium transition-colors hover:border-foreground"
+            className="rounded-full border border-border bg-card px-6 py-3 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
           >
             Download resume
           </a>
           <span className="label-mono hidden text-faint sm:inline">
-            <a className="transition-colors hover:text-foreground" href={site.github} target="_blank" rel="noreferrer">
+            <a className="transition-colors hover:text-primary" href={site.github} target="_blank" rel="noreferrer">
               GitHub
             </a>
             {" / "}
-            <a className="transition-colors hover:text-foreground" href={site.linkedin} target="_blank" rel="noreferrer">
+            <a className="transition-colors hover:text-primary" href={site.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
             </a>
           </span>
         </motion.div>
+
+        <motion.ul
+          className="label-mono flex list-none flex-wrap items-center gap-x-3 gap-y-2 p-0 text-faint"
+          initial={still ? false : { opacity: 0, transform: riseFrom }}
+          animate={
+            headlineComplete || still
+              ? { opacity: 1, transform: riseTo }
+              : undefined
+          }
+          transition={{ ...ui, delay: theme.motionMode === "full" ? 0.1 : 0 }}
+        >
+          {site.hero.credentials.map((credential, index) => (
+            <li key={credential} className="flex items-center gap-3">
+              {index > 0 && (
+                <span aria-hidden="true" className="text-accent">
+                  ·
+                </span>
+              )}
+              {credential}
+            </li>
+          ))}
+        </motion.ul>
       </div>
 
       <motion.a
         href="#timeline"
         aria-label="Scroll to content"
-        className="label-mono absolute bottom-8 left-1/2 -translate-x-1/2 text-faint transition-colors hover:text-foreground"
+        className="label-mono absolute bottom-8 left-1/2 -translate-x-1/2 text-faint transition-colors hover:text-primary"
         initial={still ? false : { opacity: 0 }}
         animate={headlineComplete || still ? { opacity: 1 } : undefined}
         transition={{ ...ui, delay: 0.3 }}
