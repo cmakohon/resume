@@ -8,7 +8,11 @@ export const site = {
   email: "cmakohon@me.com",
   github: "https://github.com/cmakohon",
   linkedin: "https://www.linkedin.com/in/collin-makohon-3b1a67126",
+  /** Generated at build from src/content (src/lib/resume.ts). */
   resumePdf: "/CollinMakohonResume2026.pdf",
+  // EDIT-ME: a longer summary for the top of the resume PDF. Falls back to
+  // hero.deck while it's unset.
+  resumeSummary: undefined as string | undefined,
   /**
    * Header jump links. Each `id` matches a section's DOM id. `from` is the
    * smallest breakpoint a link shows at, so phones keep the few that matter.
