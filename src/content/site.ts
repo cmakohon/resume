@@ -14,7 +14,7 @@ export const site = {
    * smallest breakpoint a link shows at, so phones keep the few that matter.
    */
   nav: [
-    { id: "timeline", label: "Work", from: "base" },
+    { id: "timeline", label: "Work", from: "xs" },
     { id: "projects", label: "Projects", from: "lg" },
     { id: "how-i-work", label: "How I work", from: "lg" },
     { id: "skills", label: "Toolbox", from: "lg" },

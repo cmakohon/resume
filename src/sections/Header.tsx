@@ -5,6 +5,8 @@ import { site } from "@/content/site"
 /** Full class strings so Tailwind sees them. */
 const SHOW_FROM = {
   base: undefined,
+  // Below 360px the name, two links, and the toggle overflow the bar.
+  xs: "hidden min-[360px]:block",
   sm: "hidden sm:block",
   lg: "hidden lg:block",
 } as const
