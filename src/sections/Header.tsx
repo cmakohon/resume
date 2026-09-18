@@ -60,13 +60,12 @@ export function Header() {
           : "border-transparent bg-transparent"
       }`}
     >
-      {/* Same measure as the sections below, so the accent rule sits on their grid. */}
+      {/* Same measure as the sections below, so the name lines up with their left edge. */}
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-6 py-4">
         <a
           href="#top"
-          className="flex shrink-0 items-center gap-3 text-[0.9375rem] font-semibold tracking-tight transition-colors hover:text-primary"
+          className="shrink-0 text-[0.9375rem] font-semibold tracking-tight transition-colors hover:text-primary"
         >
-          <span aria-hidden="true" className="h-0.5 w-4 bg-accent" />
           {site.name}
         </a>
 
