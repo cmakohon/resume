@@ -47,7 +47,7 @@ export function Hero() {
     >
       <RisingDots />
 
-      <div className="mx-auto flex w-full max-w-4xl flex-col items-start gap-8">
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-start gap-8">
         <motion.p
           className="label-mono flex items-center gap-3 text-muted-foreground"
           initial={still ? false : { opacity: 0, transform: riseFrom }}
@@ -114,7 +114,7 @@ export function Hero() {
           >
             Download resume
           </a>
-          <span className="label-mono hidden text-faint sm:inline">
+          <span className="label-mono text-muted-foreground">
             <a className="transition-colors hover:text-primary" href={site.github} target="_blank" rel="noreferrer">
               GitHub
             </a>

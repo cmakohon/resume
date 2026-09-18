@@ -12,7 +12,7 @@ export function Skills() {
       aria-labelledby="skills-heading"
     >
       <motion.div
-        className="mx-auto flex w-full max-w-4xl flex-col gap-16"
+        className="mx-auto flex w-full max-w-5xl flex-col gap-16"
         variants={still ? undefined : container}
         initial={still ? false : "hidden"}
         whileInView={still ? undefined : "show"}
@@ -44,7 +44,7 @@ export function Skills() {
               className="grid grid-cols-1 gap-2 border-b border-border py-5 first:border-t sm:grid-cols-[10rem_1fr] sm:gap-8"
               variants={itemLeft}
             >
-              <h3 className="label-mono pt-0.5 text-primary">{group.label}</h3>
+              <h3 className="label-mono pt-0.5 text-muted-foreground">{group.label}</h3>
               <p className="font-mono text-[0.8125rem] leading-relaxed text-muted-foreground">
                 {group.items.join(" · ")}
               </p>

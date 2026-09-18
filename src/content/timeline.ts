@@ -1,5 +1,6 @@
 // The dual-track timeline: company eras on one track, the projects built
-// during each era on the other. Chronological, 2013 → now.
+// during each era on the other. Kept chronological here, 2013 → now; the
+// section renders it newest first.
 
 export interface FeaturedStory {
   problem: string
@@ -12,7 +13,10 @@ export interface TimelineProject {
   title: string
   summary: string
   tech: string[]
-  /** Featured projects get the full problem → approach → outcome treatment. */
+  /** Consulting work: who it was for. Rendered as a kicker above the title. */
+  client?: string
+  /** At most one per era. Featured cards show the whole story; the rest show only its outcome. */
+  featured?: boolean
   story?: FeaturedStory
   link?: string
 }
@@ -59,6 +63,7 @@ export const eras: TimelineEra[] = [
       {
         id: "deposit-exceptions",
         title: "Deposit exception processing engine",
+        client: "Bank of America",
         summary:
           "Led the frontend for a deposit exception processing engine at Bank of America, and pitched in on the REST endpoints and backend services.",
         tech: ["Angular 10", "NG-ZORRO", "Akita"],
@@ -66,6 +71,7 @@ export const eras: TimelineEra[] = [
       {
         id: "foreign-item",
         title: "Foreign item reconciliation engine",
+        client: "Bank of America",
         summary:
           "Lead frontend developer on the rewrite of the engine that processes every foreign check Bank of America receives.",
         tech: ["Angular 6", "RxJS", "Spring Boot"],
@@ -73,6 +79,7 @@ export const eras: TimelineEra[] = [
       {
         id: "premier-health",
         title: "Financial healthcare record management",
+        client: "Premier Inc.",
         summary:
           "Built a healthcare record management system at Premier Inc. on a team of 11 developers.",
         tech: ["Angular 6", "Java", "Spring", "Docker"],
@@ -114,6 +121,7 @@ export const eras: TimelineEra[] = [
         summary:
           "A React platform that 100+ security analysts use every day to research and respond to network threats.",
         tech: ["React", "Tailwind CSS", "OpenShift", "CI/CD"],
+        featured: true,
         story: {
           problem:
             "Security analysts needed a fast, reliable way to research and respond to network threats. What existed was an on-prem proof of concept that couldn't scale and couldn't ship safely.",
@@ -141,6 +149,7 @@ export const eras: TimelineEra[] = [
         summary:
           "Idea to working demo in two weeks: real-time EPC to UPC mapping over Kafka streams, with live visualization.",
         tech: ["React", "Kafka", "WebSockets", "Node.js"],
+        featured: true,
         story: {
           problem:
             "Leadership needed to see whether RFID receiving could work in a real store bay, and they needed to see it in time for roadmap decisions.",

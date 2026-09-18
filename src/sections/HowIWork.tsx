@@ -12,7 +12,7 @@ export function HowIWork() {
       aria-labelledby="how-i-work-heading"
     >
       <motion.header
-        className="mx-auto mb-16 flex w-full max-w-4xl flex-col gap-5"
+        className="mx-auto mb-16 flex w-full max-w-5xl flex-col gap-5"
         variants={still ? undefined : container}
         initial={still ? false : "hidden"}
         whileInView={still ? undefined : "show"}
@@ -32,7 +32,7 @@ export function HowIWork() {
 
       {/* The practice behind the thesis: a numbered essay list, not a feature grid. */}
       <motion.ol
-        className="mx-auto w-full max-w-4xl list-none p-0"
+        className="mx-auto w-full max-w-5xl list-none p-0"
         variants={still ? undefined : container}
         initial={still ? false : "hidden"}
         whileInView={still ? undefined : "show"}

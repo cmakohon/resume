@@ -23,10 +23,11 @@ export default function App() {
         <FooterRevealContent>
           <main>
             <Hero />
+            {/* Act one is the work, act two is the person and the fit. */}
             <Timeline />
-            <Projects />
             <HowIWork />
             <Skills />
+            <Projects />
             <About />
             <LookingFor />
           </main>

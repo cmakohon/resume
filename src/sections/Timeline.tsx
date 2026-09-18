@@ -4,6 +4,9 @@ import { useAmbient } from "@/components/ambient"
 import { useReveal } from "@/components/reveal"
 import { eras, type TimelineEra, type TimelineProject } from "@/content/timeline"
 
+/** Newest first, so the most recent work is the first thing a reader meets. */
+const newestFirst = [...eras].reverse()
+
 export function Timeline() {
   const { theme, still, container, item } = useReveal()
   const bodyRef = useRef<HTMLDivElement>(null)
@@ -33,14 +36,14 @@ export function Timeline() {
       aria-labelledby="timeline-heading"
     >
       <motion.header
-        className="mx-auto mb-20 flex w-full max-w-5xl flex-col gap-5"
+        className="mx-auto mb-16 flex w-full max-w-5xl flex-col gap-5"
         variants={still ? undefined : container}
         initial={still ? false : "hidden"}
         whileInView={still ? undefined : "show"}
         viewport={{ amount: theme.inView.amount, once: theme.inView.once }}
       >
         <motion.p className="label-mono text-primary" variants={item}>
-          2013–Now
+          Work · Now–2013
         </motion.p>
         <motion.h2
           id="timeline-heading"
@@ -53,9 +56,8 @@ export function Timeline() {
           className="max-w-[56ch] text-base leading-relaxed text-muted-foreground"
           variants={item}
         >
-          It starts in Chapel Hill. One track for where I was, one for what I
-          was building at the time. Featured projects carry the full story:
-          problem, approach, outcome.
+          Most recent first. Featured projects carry the full story: problem,
+          approach, outcome.
         </motion.p>
       </motion.header>
 
@@ -85,7 +87,7 @@ export function Timeline() {
         </div>
 
         <div className="flex flex-col gap-24 lg:gap-32">
-          {eras.map((era) => (
+          {newestFirst.map((era) => (
             <EraBlock key={era.id} era={era} />
           ))}
         </div>
@@ -177,7 +179,7 @@ function EraBlock({ era }: { era: TimelineEra }) {
 
 function ProjectCard({ project }: { project: TimelineProject }) {
   const { theme, still, item } = useReveal()
-  const featured = Boolean(project.story)
+  const featured = Boolean(project.featured && project.story)
 
   return (
     <motion.article
@@ -192,7 +194,21 @@ function ProjectCard({ project }: { project: TimelineProject }) {
       viewport={{ amount: 0.3, once: theme.inView.once }}
     >
       <div className="flex flex-col gap-3">
-        {featured && <span className="label-mono text-primary">Featured</span>}
+        {(featured || project.client) && (
+          <p className="label-mono flex items-center gap-3">
+            {featured && <span className="text-primary">Featured</span>}
+            {featured && project.client && (
+              <span aria-hidden="true" className="text-accent">
+                ·
+              </span>
+            )}
+            {project.client && (
+              <span className="text-muted-foreground">
+                Client · {project.client}
+              </span>
+            )}
+          </p>
+        )}
         <h4 className="text-xl font-semibold tracking-tight">
           {project.link ? (
             <a
@@ -213,8 +229,12 @@ function ProjectCard({ project }: { project: TimelineProject }) {
 
         {project.story && (
           <dl className="mt-3 flex flex-col gap-4 border-t border-border pt-4">
-            <StoryRow label="Problem" text={project.story.problem} />
-            <StoryRow label="Approach" text={project.story.approach} />
+            {featured && (
+              <>
+                <StoryRow label="Problem" text={project.story.problem} />
+                <StoryRow label="Approach" text={project.story.approach} />
+              </>
+            )}
             <StoryRow label="Outcome" text={project.story.outcome} />
           </dl>
         )}
@@ -237,7 +257,7 @@ function ProjectCard({ project }: { project: TimelineProject }) {
 function StoryRow({ label, text }: { label: string; text: string }) {
   return (
     <div className="flex flex-col gap-1">
-      <dt className="label-mono text-faint">{label}</dt>
+      <dt className="label-mono text-muted-foreground">{label}</dt>
       <dd className="m-0 text-sm leading-relaxed">{text}</dd>
     </div>
   )

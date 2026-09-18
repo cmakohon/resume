@@ -19,10 +19,10 @@ export function Footer() {
 
   return (
     <FooterRevealFooter
-      className="bg-footer text-footer-foreground dark:border-t dark:border-border"
+      className="bg-footer px-6 text-footer-foreground sm:px-10 dark:border-t dark:border-border"
       backdrop={<RisingDots tone="footer" seed={9} active={uncovered} />}
     >
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-20 sm:px-10 sm:py-24">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 py-20 sm:py-24">
         <div className="flex flex-col gap-6">
           <p className="label-mono flex items-center gap-3 text-accent">
             <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
@@ -35,9 +35,7 @@ export function Footer() {
             Let's talk.
           </a>
           <p className="max-w-[44ch] text-sm leading-relaxed text-footer-foreground/70">
-            Looking for Senior, Staff, or Lead roles on a team that cares
-            about the people using what it builds. Email is the fastest way to reach me. The resume has the
-            rest.
+            Email is the fastest way to reach me. The resume has the rest.
           </p>
         </div>
 
@@ -74,10 +72,10 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <p className="label-mono text-footer-foreground/40">
+          <p className="label-mono text-footer-foreground/60">
             Built with Claude Code, reviewed like any other PR.
           </p>
-          <p className="label-mono text-footer-foreground/40">
+          <p className="label-mono text-footer-foreground/60">
             © {year} {site.name} · {site.location}
           </p>
         </div>
