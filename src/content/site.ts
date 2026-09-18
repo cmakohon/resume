@@ -7,8 +7,7 @@ export const site = {
   location: "Charlotte, NC",
   email: "cmakohon@me.com",
   github: "https://github.com/cmakohon",
-  // EDIT-ME: real LinkedIn URL
-  linkedin: "https://www.linkedin.com/in/collinmakohon",
+  linkedin: "https://www.linkedin.com/in/collin-makohon-3b1a67126",
   resumePdf: "/CollinMakohonResume2026.pdf",
   /**
    * Header jump links. Each `id` matches a section's DOM id. `from` is the
@@ -27,7 +26,7 @@ export const site = {
     headline: "I love solving problems for people.",
     deck: "Senior fullstack engineer, building with agentic tools every day. Consulting, banking, and now retail.",
     subline:
-      "I've been doing it with software for nine-plus years. The tools keep changing (I do miss hunting for the perfect CSS property), but the goal hasn't: build things that make someone's day a little better.",
+      "I've been writing software for nine-plus years. The tools keep changing (I do miss hunting for the perfect CSS property), but the goal hasn't: build things that make someone's day a little better.",
     /** Mono credential strip under the calls to action. Chronological. */
     credentials: ["9+ years", "CapTech", "Bank of America", "Lowe's"],
   },

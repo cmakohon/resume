@@ -15,8 +15,7 @@ export const workPrinciples: WorkPrinciple[] = [
   },
   {
     title: "Hand the repetitive work to AI",
-    body: "I'm a huge advocate for using AI at what it was designed for: understanding protocols, following established patterns, and grinding through repetitive tasks. At Lowe's I learned agentic workflows and Snyk's MCP tooling, then taught both to the team, and our vulnerability resolution time dropped significantly.",
-    // EDIT-ME: swap "significantly" for the real before/after if you have it.
+    body: "I'm a huge advocate for using AI at what it was designed for: understanding protocols, following established patterns, and grinding through repetitive tasks. At Lowe's I learned agentic workflows and Snyk's MCP tooling, then taught both to the team, and our vulnerability resolution time went from 2–3 days to 1–2 hours.",
   },
   {
     title: "Put the saved time into polish",

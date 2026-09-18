@@ -4,7 +4,7 @@
 export const projectsIntro =
   "Two apps I'm building because I wanted them to exist. Neither is out yet. When one ships, the link goes here."
 
-export type ProjectStatus = "Live" | "In beta" | "In progress"
+export type ProjectStatus = "Live" | "TestFlight beta" | "In progress"
 
 export interface PersonalProject {
   id: string
@@ -22,19 +22,19 @@ export interface PersonalProject {
   store?: { label: string; href: string }
 }
 
-// EDIT-ME: drafted from one-line descriptions. Confirm the status, the tech
-// tags (best guesses), and what each app does today. Add `store` only when
-// the listing URL is real.
+// Add `store` only when the listing URL is real.
+// EDIT-ME: TradePost's status, tech tags, and description are still Claude's
+// best guesses. Confirm them.
 export const projects: PersonalProject[] = [
   {
     id: "dexflip",
     name: "DexFlip",
     platform: "iOS app",
-    status: "In progress",
+    status: "TestFlight beta",
     tagline: "Scan a Pokémon card, get it listed on eBay.",
     body:
       "I collect Pokémon cards (it's in the About section, I'm not hiding it), and listing them on eBay one at a time is miserable: find the set, find the card number, type a title, guess at a price. DexFlip is a native iOS app that identifies the card from the camera, pulls what it has been selling for, and builds the listing for you.",
-    tech: ["Swift", "SwiftUI", "Vision", "eBay API"],
+    tech: ["Swift", "SwiftUI", "Vision", "eBay API", "Google Sheets API"],
   },
   {
     id: "tradepost",
