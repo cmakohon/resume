@@ -1,4 +1,9 @@
-import { FooterRevealFooter } from "@/components/motion-ui/footer-reveal"
+import { useMotionValueEvent } from "motion/react"
+import { useState } from "react"
+import {
+  FooterRevealFooter,
+  useFooterRevealProgress,
+} from "@/components/motion-ui/footer-reveal"
 import { RisingDots } from "@/components/RisingDots"
 import { site } from "@/content/site"
 
@@ -6,10 +11,16 @@ import { site } from "@/content/site"
 export function Footer() {
   const year = new Date().getFullYear()
 
+  // The footer is sticky, so it always counts as on screen even while the
+  // page covers it. Its dots run only once the reveal has started.
+  const reveal = useFooterRevealProgress()
+  const [uncovered, setUncovered] = useState(() => reveal.get() > 0)
+  useMotionValueEvent(reveal, "change", (progress) => setUncovered(progress > 0))
+
   return (
     <FooterRevealFooter
       className="bg-footer text-footer-foreground dark:border-t dark:border-border"
-      backdrop={<RisingDots tone="footer" seed={9} />}
+      backdrop={<RisingDots tone="footer" seed={9} active={uncovered} />}
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-20 sm:px-10 sm:py-24">
         <div className="flex flex-col gap-6">

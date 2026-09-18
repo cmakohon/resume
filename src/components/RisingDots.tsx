@@ -45,6 +45,8 @@ export interface RisingDotsProps {
   tone?: "page" | "footer"
   /** Layout seed. Seed 4 is the hero layout picked on the design canvas. */
   seed?: number
+  /** False pauses the loops even while the layer is in view. */
+  active?: boolean
 }
 
 /**
@@ -56,12 +58,12 @@ export interface RisingDotsProps {
  * Every dot is nested spans so each motion owns one transform:
  * pointer push (written here) > rise (CSS, also the fade) > sway (CSS).
  */
-export function RisingDots({ tone = "page", seed = 4 }: RisingDotsProps) {
+export function RisingDots({ tone = "page", seed = 4, active = true }: RisingDotsProps) {
   const theme = useMotionUITheme()
   const layerRef = useRef<HTMLDivElement>(null)
   const pushRefs = useRef<(HTMLSpanElement | null)[]>([])
   const riseRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const ambient = useAmbient(layerRef)
+  const ambient = useAmbient(layerRef, active)
   const dots = useMemo(() => makeDots(seed), [seed])
   const colors = TONES[tone]
   const interactive = theme.motionMode === "full"
