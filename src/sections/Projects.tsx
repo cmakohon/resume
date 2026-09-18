@@ -26,7 +26,7 @@ export function Projects() {
           className="max-w-[20ch] text-balance text-4xl font-semibold tracking-tight sm:text-5xl"
           variants={item}
         >
-          Things I'm shipping on my own time.
+          Things I'm building on my own time.
         </motion.h2>
         <motion.p
           className="max-w-[56ch] text-base leading-relaxed text-muted-foreground"
@@ -52,7 +52,15 @@ export function Projects() {
             aria-labelledby={`project-${project.id}`}
           >
             <div className="flex flex-col gap-3">
-              <p className="label-mono text-muted-foreground">{project.platform}</p>
+              <p className="label-mono flex items-center gap-3 text-muted-foreground">
+                {project.platform}
+                <span aria-hidden="true" className="text-accent">
+                  ·
+                </span>
+                <span className={project.status === "Live" ? "text-primary" : undefined}>
+                  {project.status}
+                </span>
+              </p>
               <h3
                 id={`project-${project.id}`}
                 className="text-3xl font-semibold tracking-tight"
@@ -78,14 +86,16 @@ export function Projects() {
                   </li>
                 ))}
               </ul>
-              <a
-                href={project.store.href}
-                target="_blank"
-                rel="noreferrer"
-                className="label-mono self-start text-primary transition-colors hover:text-foreground"
-              >
-                {project.store.label} ↗
-              </a>
+              {project.store && (
+                <a
+                  href={project.store.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="label-mono self-start text-primary transition-colors hover:text-foreground"
+                >
+                  {project.store.label} ↗
+                </a>
+              )}
             </div>
           </motion.article>
         ))}

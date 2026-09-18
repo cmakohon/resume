@@ -1,7 +1,7 @@
 // The "What I'm looking for" section: role, boundaries, location, leadership.
 
 export const lookingForIntro =
-  "Honestly, I'm not picky about the domain. I've shipped in banking, healthcare, and retail, and exciting problems exist anywhere someone genuinely needs one solved."
+  "Honestly, I'm not picky about the domain. I've shipped in banking, healthcare, and retail, and exciting problems exist anywhere someone needs one solved."
 
 export interface LookingForGroup {
   title: string
@@ -11,7 +11,7 @@ export interface LookingForGroup {
 export const lookingForGroups: LookingForGroup[] = [
   {
     title: "Interested in",
-    body: "Senior, Staff, or Lead development roles, or roles guiding technical direction at a higher level. What matters most is a team that's truly trying to build software that solves real problems.",
+    body: "Senior, Staff, or Lead development roles, or roles guiding technical direction at a higher level. What matters most is a team that's trying to build software that solves real problems.",
   },
   {
     title: "Not interested in",

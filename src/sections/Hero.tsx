@@ -22,21 +22,20 @@ export function Hero() {
   const rise = { opacity: 1, transform: riseTo }
 
   // One cascade, one spring. The headline words start rising at
-  // HEADLINE_DELAY and the last one lifts off around 0.45s; everything else
+  // HEADLINE_DELAY and the last one lifts off around 0.35s; everything else
   // joins while those last words are still landing, on the same gentle
   // spring, so the hero reads as a single gesture rather than a headline
   // followed by an afterthought. Offsets are seconds after the headline's
   // entrance actually begins (fonts ready), not after mount.
-  const HEADLINE_DELAY = full ? 0.15 : 0
+  const HEADLINE_DELAY = full ? 0.05 : 0
   const follow = (offset: number) => ({
     ...gentle,
     delay: full ? offset : 0,
   })
-  const DECK_AT = 0.4
-  const SUBLINE_AT = 0.5
-  const ACTIONS_AT = 0.6
-  const CREDENTIALS_AT = 0.7
-  const SCROLL_AT = 1.0
+  const DECK_AT = 0.2
+  const SUBLINE_AT = 0.25
+  const ACTIONS_AT = 0.3
+  const CREDENTIALS_AT = 0.35
 
   return (
     <section
@@ -127,7 +126,7 @@ export function Hero() {
         </motion.div>
 
         <motion.ul
-          className="label-mono flex list-none flex-wrap items-center gap-x-3 gap-y-2 p-0 text-faint"
+          className="label-mono flex list-none flex-wrap items-center gap-x-3 gap-y-2 p-0 text-muted-foreground"
           initial={still ? false : { opacity: 0, transform: riseFrom }}
           animate={headlineStarted || still ? rise : undefined}
           transition={follow(CREDENTIALS_AT)}
@@ -144,17 +143,6 @@ export function Hero() {
           ))}
         </motion.ul>
       </div>
-
-      <motion.a
-        href="#timeline"
-        aria-label="Scroll to content"
-        className="label-mono absolute bottom-8 left-1/2 -translate-x-1/2 text-faint transition-colors hover:text-primary"
-        initial={still ? false : { opacity: 0 }}
-        animate={headlineStarted || still ? { opacity: 1 } : undefined}
-        transition={follow(SCROLL_AT)}
-      >
-        Scroll
-      </motion.a>
     </section>
   )
 }
