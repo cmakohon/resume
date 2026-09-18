@@ -60,7 +60,6 @@ export function ThemeToggle() {
       type="button"
       onClick={onClick}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      aria-pressed={dark}
       className="-m-2 grid size-8 cursor-pointer place-items-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
     >
       <AnimatePresence mode="popLayout" initial={false}>
