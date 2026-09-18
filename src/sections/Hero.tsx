@@ -131,10 +131,18 @@ export function Hero() {
           animate={headlineStarted || still ? rise : undefined}
           transition={follow(CREDENTIALS_AT)}
         >
+          {/* Phones can't fit all four on one line, so the years get their
+              own line and the companies stay together on the next. */}
           {site.hero.credentials.map((credential, index) => (
-            <li key={credential} className="flex items-center gap-3">
+            <li
+              key={credential}
+              className={`flex items-center gap-3 ${index === 0 ? "max-sm:basis-full" : ""}`}
+            >
               {index > 0 && (
-                <span aria-hidden="true" className="text-accent">
+                <span
+                  aria-hidden="true"
+                  className={`text-accent ${index === 1 ? "max-sm:hidden" : ""}`}
+                >
                   ·
                 </span>
               )}
