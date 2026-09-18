@@ -164,7 +164,7 @@ function ProjectCard({ project }: { project: TimelineProject }) {
     <motion.article
       className={`rounded-xl border border-border bg-card p-6 sm:p-7 ${
         featured
-          ? "shadow-[0_1px_2px_rgba(28,27,23,0.04),0_8px_24px_-12px_rgba(28,27,23,0.12)]"
+          ? "shadow-(--card-shadow)"
           : ""
       }`}
       variants={still ? undefined : item}

@@ -50,7 +50,7 @@ export function About() {
             <img
               src="/headshot.jpg"
               alt={`Portrait of ${site.name}`}
-              className="size-36 rotate-2 rounded-2xl border border-border object-cover shadow-[0_1px_2px_rgba(28,27,23,0.04),0_8px_24px_-12px_rgba(28,27,23,0.12)]"
+              className="size-36 rotate-2 rounded-2xl border border-border object-cover shadow-(--card-shadow)"
               onError={() => setPhotoMissing(true)}
             />
           )}

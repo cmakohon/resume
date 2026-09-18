@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { ThemeToggle } from "@/components/ThemeToggle"
 import { site } from "@/content/site"
 
 /** `contact` lives inside the sticky footer, so it never gets an active state. */
@@ -60,26 +61,29 @@ export function Header() {
           {site.name}
         </a>
 
-        <nav aria-label="Sections">
-          <ul className="label-mono m-0 flex list-none items-center gap-6 p-0">
-            {site.nav.map((item) => (
-              <li
-                key={item.id}
-                className={item.id === "contact" ? undefined : "hidden lg:block"}
-              >
-                <a
-                  href={`#${item.id}`}
-                  aria-current={activeId === item.id ? "location" : undefined}
-                  className={`transition-colors hover:text-foreground ${
-                    activeId === item.id ? "text-primary" : "text-muted-foreground"
-                  }`}
+        <div className="flex items-center gap-6">
+          <nav aria-label="Sections">
+            <ul className="label-mono m-0 flex list-none items-center gap-6 p-0">
+              {site.nav.map((item) => (
+                <li
+                  key={item.id}
+                  className={item.id === "contact" ? undefined : "hidden lg:block"}
                 >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                  <a
+                    href={`#${item.id}`}
+                    aria-current={activeId === item.id ? "location" : undefined}
+                    className={`transition-colors hover:text-foreground ${
+                      activeId === item.id ? "text-primary" : "text-muted-foreground"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   )

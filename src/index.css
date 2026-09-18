@@ -2,6 +2,9 @@
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/geist-mono';
 
+/* Dark mode is driven by data-theme on <html>, set before paint in index.html. */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -20,7 +23,71 @@
   --color-accent: #4b9cd3;
   --color-accent-soft: #e9f1f8;
 
+  /* The footer is its own deep surface in both modes. */
+  --color-footer: #1c1b17;
+  --color-footer-foreground: #faf9f6;
+
   --tracking-caps: 0.14em;
+}
+
+/* Warm near-black to match the warm off-white. Primary lifts to a lighter
+   Carolina so links and buttons keep their contrast on the dark ground. */
+:root {
+  color-scheme: light;
+  /* Plain property, not @theme: Tailwind inlines theme shadows, and this one
+     has to change at runtime. Used as shadow-(--card-shadow). */
+  --card-shadow: 0 1px 2px rgba(28, 27, 23, 0.04), 0 8px 24px -12px rgba(28, 27, 23, 0.12);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-background: #141412;
+  --color-foreground: #ece9e1;
+  --color-muted-foreground: #a09c90;
+  --color-faint: #6b685f;
+  --color-border: #2c2b27;
+  --color-card: #1c1b18;
+  --color-primary: #7cb9e4;
+  --color-primary-foreground: #0e1a24;
+  --color-accent: #4b9cd3;
+  --color-accent-soft: #18293a;
+  --color-footer: #0b0b0a;
+  --color-footer-foreground: #ece9e1;
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Printing always comes out light. */
+@media print {
+  :root[data-theme='dark'] {
+    color-scheme: light;
+    --color-background: #faf9f6;
+    --color-foreground: #1c1b17;
+    --color-muted-foreground: #6d6a60;
+    --color-faint: #a3a094;
+    --color-border: #e6e3da;
+    --color-card: #ffffff;
+    --color-primary: #24689b;
+    --color-primary-foreground: #ffffff;
+    --color-accent-soft: #e9f1f8;
+    --color-footer: #1c1b17;
+    --color-footer-foreground: #faf9f6;
+    --card-shadow: none;
+  }
+}
+
+/* Swap themes in one frame instead of fading every transition-colors element. */
+.theme-switching,
+.theme-switching * {
+  transition: none !important;
+}
+
+/* Theme switch: src/lib/theme.ts drives the new layer with the Web Animations
+   API, so the browser's default cross-fade is switched off and the old
+   theme simply holds still underneath. */
+:root[data-theme-switch]::view-transition-old(root),
+:root[data-theme-switch]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 html {
@@ -49,6 +116,10 @@ body {
 ::selection {
   background: var(--color-accent);
   color: var(--color-foreground);
+}
+
+[data-theme='dark'] ::selection {
+  color: var(--color-background);
 }
 
 /* Mono metadata label: dates, tech tags, kickers. */
