@@ -22,10 +22,15 @@ function llmsTxt(): Plugin {
       server.middlewares.use(async (req, res, next) => {
         const name = req.url?.split('?')[0].slice(1)
         if (name !== 'llms.txt' && name !== 'llms-full.txt') return next()
-        // Loaded per request so content edits show up without a restart.
-        const md = (await server.ssrLoadModule('/src/lib/markdown.ts')) as MarkdownModule
-        res.setHeader('Content-Type', 'text/plain; charset=utf-8')
-        res.end(files(md)[name])
+        try {
+          // Loaded per request so content edits show up without a restart.
+          const md = (await server.ssrLoadModule('/src/lib/markdown.ts')) as MarkdownModule
+          res.setHeader('Content-Type', 'text/plain; charset=utf-8')
+          res.end(files(md)[name])
+        } catch (error) {
+          // Connect doesn't catch async rejections; hand it the error instead.
+          next(error)
+        }
       })
     },
     generateBundle() {
@@ -45,10 +50,15 @@ function resumePdf(): Plugin {
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         if (req.url?.split('?')[0] !== path) return next()
-        // Loaded per request so content edits show up without a restart.
-        const resume = (await server.ssrLoadModule('/src/lib/resume.ts')) as ResumeModule
-        res.setHeader('Content-Type', 'application/pdf')
-        res.end(await resume.buildResumePdf())
+        try {
+          // Loaded per request so content edits show up without a restart.
+          const resume = (await server.ssrLoadModule('/src/lib/resume.ts')) as ResumeModule
+          const pdf = await resume.buildResumePdf()
+          res.setHeader('Content-Type', 'application/pdf')
+          res.end(pdf)
+        } catch (error) {
+          next(error)
+        }
       })
     },
     async generateBundle() {
