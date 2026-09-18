@@ -1,5 +1,7 @@
 import { motion } from "motion/react"
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { useAmbient } from "@/components/ambient"
+import { HeroCloud } from "@/components/HeroCloud"
 import { SplitReveal } from "@/components/motion-ui/split-reveal"
 import { useMotionUITheme, useMotionUITransition } from "@/components/motion-ui/ui-theme"
 import { site } from "@/content/site"
@@ -11,6 +13,8 @@ export function Hero() {
   const gentle = useMotionUITransition("gentle")
   const full = theme.motionMode === "full"
   const [headlineStarted, setHeadlineStarted] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const ambient = useAmbient(sectionRef)
 
   // Literal transform strings keep these entrances compositor-driven.
   const riseFrom = calm ? "none" : `translateY(${theme.travel.enter}px)`
@@ -36,10 +40,14 @@ export function Hero() {
 
   return (
     <section
+      ref={sectionRef}
+      {...ambient}
       id="top"
-      className="relative flex min-h-svh w-full flex-col justify-center overflow-x-clip px-6 py-24 sm:px-10"
+      className="relative isolate flex min-h-svh w-full flex-col justify-center overflow-x-clip px-6 py-24 sm:px-10"
       aria-labelledby="hero-heading"
     >
+      <HeroCloud hostRef={sectionRef} />
+
       <div className="mx-auto flex w-full max-w-4xl flex-col items-start gap-8">
         <motion.p
           className="label-mono flex items-center gap-3 text-muted-foreground"
@@ -47,7 +55,7 @@ export function Hero() {
           animate={rise}
           transition={gentle}
         >
-          <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
+          <span aria-hidden="true" className="ambient-stretch h-0.5 w-8 origin-left bg-accent" />
           {site.location}
         </motion.p>
 

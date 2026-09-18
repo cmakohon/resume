@@ -1,12 +1,18 @@
 import { motion } from "motion/react"
+import { useRef } from "react"
+import { useAmbient } from "@/components/ambient"
 import { useReveal } from "@/components/reveal"
 import { lookingForGroups, lookingForIntro } from "@/content/lookingFor"
 
 export function LookingFor() {
   const { theme, still, container, item, itemLeft } = useReveal()
+  const sectionRef = useRef<HTMLElement>(null)
+  const ambient = useAmbient(sectionRef)
 
   return (
     <section
+      ref={sectionRef}
+      {...ambient}
       id="looking-for"
       className="w-full overflow-x-clip border-t border-border px-6 py-24 sm:px-10 sm:py-32"
       aria-labelledby="looking-for-heading"
@@ -22,9 +28,13 @@ export function LookingFor() {
         >
           <motion.h2
             id="looking-for-heading"
-            className="label-mono text-primary"
+            className="label-mono flex items-center gap-3 text-primary"
             variants={item}
           >
+            {/* Status light: still looking. */}
+            <span aria-hidden="true" className="relative size-2 rounded-full bg-accent">
+              <span className="ambient-breathe absolute inset-0 rounded-full bg-accent opacity-0" />
+            </span>
             What I'm looking for
           </motion.h2>
           <motion.p

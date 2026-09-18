@@ -1,5 +1,6 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react"
 import { useRef } from "react"
+import { useAmbient } from "@/components/ambient"
 import { useReveal } from "@/components/reveal"
 import { eras, type TimelineEra, type TimelineProject } from "@/content/timeline"
 
@@ -17,6 +18,13 @@ export function Timeline() {
     damping: 30,
     restDelta: 0.001,
   })
+  // The signal only travels the part of the spine that has drawn.
+  const signalClip = useTransform(
+    spineScale,
+    [0, 1],
+    ["inset(0% -2px 100% -2px)", "inset(0% -2px 0% -2px)"]
+  )
+  const ambient = useAmbient(bodyRef)
 
   return (
     <section
@@ -51,7 +59,11 @@ export function Timeline() {
         </motion.p>
       </motion.header>
 
-      <div ref={bodyRef} className="relative mx-auto w-full max-w-5xl">
+      <div
+        ref={bodyRef}
+        {...ambient}
+        className="relative mx-auto w-full max-w-5xl"
+      >
         {/* Spine: static rail + scroll-drawn progress. */}
         <div
           aria-hidden="true"
@@ -61,6 +73,15 @@ export function Timeline() {
             className="absolute inset-0 origin-top bg-accent"
             style={{ scaleY: still ? 1 : spineScale }}
           />
+          {/* Every so often a pulse of ink runs down the drawn line. */}
+          <motion.div
+            className="absolute inset-0"
+            style={{ clipPath: signalClip }}
+          >
+            <div className="ambient-signal h-full">
+              <div className="-ml-px h-40 w-[3px] -translate-y-full rounded-full bg-linear-to-b from-transparent via-primary to-transparent" />
+            </div>
+          </motion.div>
         </div>
 
         <div className="flex flex-col gap-24 lg:gap-32">
@@ -102,12 +123,10 @@ function EraBlock({ era }: { era: TimelineEra }) {
       ref={ref}
       className="relative grid grid-cols-1 gap-8 pl-10 lg:grid-cols-2 lg:gap-x-20 lg:pl-0"
     >
-      {/* Era marker on the spine: work filled, education pale. */}
+      {/* Era marker on the spine. */}
       <span
         aria-hidden="true"
-        className={`absolute left-[7px] top-2 size-[15px] -translate-x-1/2 rounded-full border-2 border-accent lg:left-1/2 ${
-          education ? "bg-accent-soft" : "bg-accent"
-        }`}
+        className="absolute left-[7px] top-2 size-[15px] -translate-x-1/2 rounded-full border-2 border-accent bg-accent lg:left-1/2"
       />
 
       {/* Company track. */}

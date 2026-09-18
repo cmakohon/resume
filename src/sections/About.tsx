@@ -1,5 +1,6 @@
 import { motion } from "motion/react"
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { useAmbient } from "@/components/ambient"
 import { useReveal } from "@/components/reveal"
 import { site } from "@/content/site"
 
@@ -7,9 +8,13 @@ export function About() {
   const { theme, still, container, item } = useReveal()
   // EDIT-ME: drop a headshot at public/headshot.jpg; initials render until then.
   const [photoMissing, setPhotoMissing] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const ambient = useAmbient(sectionRef)
 
   return (
     <section
+      ref={sectionRef}
+      {...ambient}
       id="about"
       className="w-full overflow-x-clip border-t border-border px-6 py-24 sm:px-10"
       aria-labelledby="about-heading"
@@ -37,23 +42,26 @@ export function About() {
           </motion.p>
         </div>
 
-        {/* A printed photo, not a corporate avatar. */}
+        {/* A printed photo, not a corporate avatar. It sways a little on
+            its pin. */}
         <motion.div variants={item} className="shrink-0 sm:pt-12">
-          {photoMissing ? (
-            <div
-              aria-hidden="true"
-              className="flex size-36 rotate-2 items-center justify-center rounded-2xl bg-accent-soft font-mono text-2xl font-semibold text-primary"
-            >
-              CM
-            </div>
-          ) : (
-            <img
-              src="/headshot.jpg"
-              alt={`Portrait of ${site.name}`}
-              className="size-36 rotate-2 rounded-2xl border border-border object-cover shadow-(--card-shadow)"
-              onError={() => setPhotoMissing(true)}
-            />
-          )}
+          <div className="ambient-sway origin-top">
+            {photoMissing ? (
+              <div
+                aria-hidden="true"
+                className="flex size-36 rotate-2 items-center justify-center rounded-2xl bg-accent-soft font-mono text-2xl font-semibold text-primary"
+              >
+                CM
+              </div>
+            ) : (
+              <img
+                src="/headshot.jpg"
+                alt={`Portrait of ${site.name}`}
+                className="size-36 rotate-2 rounded-2xl border border-border object-cover shadow-(--card-shadow)"
+                onError={() => setPhotoMissing(true)}
+              />
+            )}
+          </div>
         </motion.div>
       </motion.div>
     </section>
