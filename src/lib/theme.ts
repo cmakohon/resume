@@ -55,6 +55,8 @@ export interface ThemeSwitch {
   easing?: string
 }
 
+let activeSwitch: ViewTransition | null = null
+
 /** Set the theme and remember the choice, which stops following the OS. */
 export function setTheme(theme: Theme, how: ThemeSwitch = { style: "instant" }) {
   try {
@@ -79,6 +81,7 @@ export function setTheme(theme: Theme, how: ThemeSwitch = { style: "instant" }) 
   const transition = document.startViewTransition(() =>
     flushSync(() => apply(theme))
   )
+  activeSwitch = transition
 
   transition.ready
     .then(() => {
@@ -113,7 +116,13 @@ export function setTheme(theme: Theme, how: ThemeSwitch = { style: "instant" }) 
     })
 
   transition.finished.finally(() => {
-    delete root.dataset.themeSwitch
+    // A quick second click starts a new switch and aborts this one. Only the
+    // latest switch clears the marker, or the default cross-fade comes back
+    // mid-wipe.
+    if (activeSwitch === transition) {
+      activeSwitch = null
+      delete root.dataset.themeSwitch
+    }
   })
 }
 
