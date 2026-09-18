@@ -1,7 +1,7 @@
 import { motion } from "motion/react"
 import { useRef, useState } from "react"
 import { useAmbient } from "@/components/ambient"
-import { HeroCloud } from "@/components/HeroCloud"
+import { RisingDots } from "@/components/RisingDots"
 import { SplitReveal } from "@/components/motion-ui/split-reveal"
 import { useMotionUITheme, useMotionUITransition } from "@/components/motion-ui/ui-theme"
 import { site } from "@/content/site"
@@ -46,7 +46,7 @@ export function Hero() {
       className="relative isolate flex min-h-svh w-full flex-col justify-center overflow-x-clip px-6 py-24 sm:px-10"
       aria-labelledby="hero-heading"
     >
-      <HeroCloud hostRef={sectionRef} />
+      <RisingDots />
 
       <div className="mx-auto flex w-full max-w-4xl flex-col items-start gap-8">
         <motion.p

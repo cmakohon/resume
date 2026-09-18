@@ -134,26 +134,18 @@ body {
 /* Ambient loops. Slow, transform/opacity only, so they stay on the compositor.
    They only run inside a [data-ambient] element, which useAmbient sets in
    full motion mode, and pause while that element is off screen. */
-@keyframes ambient-drift-a {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(14px, -10px); }
-  66% { transform: translate(-6px, -20px); }
+
+/* Rising dots: climb --rise (58% of their layer, set by RisingDots.tsx)
+   over one loop, fading in and out at the ends. */
+@keyframes ambient-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  15%, 85% { opacity: 1; }
+  100% { transform: translateY(calc(var(--rise, 58svh) * -1)); opacity: 0; }
 }
 
-@keyframes ambient-drift-b {
-  0%, 100% { transform: translate(0, 0); }
-  30% { transform: translate(-12px, 8px); }
-  70% { transform: translate(10px, 16px); }
-}
-
-@keyframes ambient-drift-c {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(18px, 6px); }
-}
-
-@keyframes ambient-glow {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 1; }
+@keyframes ambient-sway-x {
+  0%, 100% { transform: translateX(-7px); }
+  50% { transform: translateX(7px); }
 }
 
 @keyframes ambient-signal {
@@ -178,11 +170,9 @@ body {
   to { transform: rotate(0.6deg); }
 }
 
-/* The hero cloud sets each dot's own duration and delay inline. */
-[data-ambient] .ambient-drift-a { animation: ambient-drift-a 30s ease-in-out infinite; }
-[data-ambient] .ambient-drift-b { animation: ambient-drift-b 30s ease-in-out infinite; }
-[data-ambient] .ambient-drift-c { animation: ambient-drift-c 30s ease-in-out infinite; }
-[data-ambient] .ambient-glow { animation: ambient-glow 10s ease-in-out infinite; }
+/* RisingDots sets each dot's own duration and delay inline. */
+[data-ambient] .ambient-rise { animation: ambient-rise 45s linear infinite; }
+[data-ambient] .ambient-sway-x { animation: ambient-sway-x 9s ease-in-out infinite; }
 [data-ambient] .ambient-signal { animation: ambient-signal 20s cubic-bezier(0.45, 0, 0.55, 1) 2s infinite; }
 [data-ambient] .ambient-breathe { animation: ambient-breathe 4.5s cubic-bezier(0.2, 0.6, 0.35, 1) infinite; }
 [data-ambient] .ambient-stretch { animation: ambient-stretch 6s ease-in-out infinite; }

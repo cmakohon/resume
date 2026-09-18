@@ -165,12 +165,16 @@ export interface FooterRevealFooterProps {
   children?: ReactNode
   /** Merged onto the sticky footer shell. */
   className?: string
+  /** Drawn behind the contents, outside the scale/blur layer, so animated
+      backgrounds don't make the blur re-render every frame. */
+  backdrop?: ReactNode
 }
 
 /** Sticky footer that fades, scales and sharpens as scroll uncovers it. */
 export function FooterRevealFooter({
   children,
   className,
+  backdrop,
 }: FooterRevealFooterProps) {
   const {
     reveal,
@@ -187,9 +191,10 @@ export function FooterRevealFooter({
       className="sticky bottom-0 z-[-1] w-full max-w-full"
     >
       <motion.div
-        className={`w-full max-w-full${className ? ` ${className}` : ""}`}
+        className={`relative isolate w-full max-w-full${className ? ` ${className}` : ""}`}
         style={{ opacity: reveal, willChange: opacityWillChange }}
       >
+        {backdrop}
         <motion.div
           className="w-full max-w-full"
           style={{
