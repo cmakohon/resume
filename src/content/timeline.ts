@@ -87,7 +87,7 @@ export const eras: TimelineEra[] = [
     end: "Feb 2022",
     years: "2021–2022",
     summary:
-      "Full stack work on a next-generation global payments platform for The Bank of London. It wasn't the right fit. After working 30 hours in a single weekend, I decided the culture wasn't for me and moved on.",
+      "Full stack work on a next-generation global payments platform for The Bank of London.",
     projects: [
       {
         id: "payments-platform",
