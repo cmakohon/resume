@@ -1,4 +1,5 @@
 import { FooterRevealFooter } from "@/components/motion-ui/footer-reveal"
+import { RisingDots } from "@/components/RisingDots"
 import { site } from "@/content/site"
 
 /** Sticky under-page footer, revealed as the page scrolls off it. A deep surface in both themes, for a decisive close. */
@@ -6,7 +7,10 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <FooterRevealFooter className="bg-footer text-footer-foreground dark:border-t dark:border-border">
+    <FooterRevealFooter
+      className="bg-footer text-footer-foreground dark:border-t dark:border-border"
+      backdrop={<RisingDots tone="footer" seed={9} />}
+    >
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-20 sm:px-10 sm:py-24">
         <div className="flex flex-col gap-6">
           <p className="label-mono flex items-center gap-3 text-accent">
