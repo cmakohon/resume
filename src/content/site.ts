@@ -15,9 +15,9 @@ export const site = {
    */
   nav: [
     { id: "timeline", label: "Work", from: "xs" },
-    { id: "projects", label: "Projects", from: "lg" },
     { id: "how-i-work", label: "How I work", from: "lg" },
     { id: "skills", label: "Toolbox", from: "lg" },
+    { id: "projects", label: "Projects", from: "lg" },
     { id: "about", label: "About", from: "sm" },
     { id: "looking-for", label: "Looking for", from: "sm" },
     { id: "contact", label: "Contact", from: "base" },

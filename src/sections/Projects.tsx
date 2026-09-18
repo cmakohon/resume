@@ -19,7 +19,7 @@ export function Projects() {
         viewport={{ amount: theme.inView.amount, once: theme.inView.once }}
       >
         <motion.p className="label-mono text-primary" variants={item}>
-          Nights and weekends
+          Projects · Nights and weekends
         </motion.p>
         <motion.h2
           id="projects-heading"
