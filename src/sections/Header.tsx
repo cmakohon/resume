@@ -2,6 +2,13 @@ import { useEffect, useState } from "react"
 import { ThemeToggle } from "@/components/ThemeToggle"
 import { site } from "@/content/site"
 
+/** Full class strings so Tailwind sees them. */
+const SHOW_FROM = {
+  base: undefined,
+  sm: "hidden sm:block",
+  lg: "hidden lg:block",
+} as const
+
 /** `contact` lives inside the sticky footer, so it never gets an active state. */
 const SPIED = site.nav.filter((item) => item.id !== "contact")
 
@@ -61,13 +68,13 @@ export function Header() {
           {site.name}
         </a>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <nav aria-label="Sections">
-            <ul className="label-mono m-0 flex list-none items-center gap-6 p-0">
+            <ul className="label-mono m-0 flex list-none items-center gap-4 p-0 sm:gap-6">
               {site.nav.map((item) => (
                 <li
                   key={item.id}
-                  className={item.id === "contact" ? undefined : "hidden lg:block"}
+                  className={SHOW_FROM[item.from]}
                 >
                   <a
                     href={`#${item.id}`}

@@ -30,8 +30,7 @@ export function Skills() {
             className="max-w-[52ch] text-sm leading-relaxed text-muted-foreground"
             variants={item}
           >
-            Things I've actually shipped with, not things I've read one blog
-            post about.
+            What I've used on projects, at work and at home.
           </motion.p>
         </div>
 

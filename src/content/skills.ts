@@ -9,11 +9,13 @@ export const skillGroups: SkillGroup[] = [
     items: [
       "React",
       "TypeScript",
+      "JavaScript",
       "Next.js",
       "Vite",
       "Redux",
       "Angular",
       "Tailwind CSS",
+      "HTML & CSS",
       "Motion",
     ],
   },
@@ -25,6 +27,7 @@ export const skillGroups: SkillGroup[] = [
       "Java",
       "Spring Boot",
       "REST APIs",
+      "SQL",
       "PostgreSQL",
       "Oracle",
       "Kafka",
@@ -43,13 +46,8 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    label: "Agentic Engineering",
-    items: [
-      "Claude Code",
-      "MCP integrations",
-      "AI-assisted workflows",
-      "Agentic task automation",
-      "LLM tooling pipelines",
-    ],
+    label: "AI tooling",
+    // EDIT-ME: add any other MCP servers you've wired up at work.
+    items: ["Claude Code", "Snyk MCP", "GitHub Copilot", "Windsurf"],
   },
 ]

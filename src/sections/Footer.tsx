@@ -35,8 +35,8 @@ export function Footer() {
             Let's talk.
           </a>
           <p className="max-w-[44ch] text-sm leading-relaxed text-footer-foreground/70">
-            Looking for Senior, Staff, or Lead roles with a team solving real
-            problems. Email is the fastest way to reach me. The resume has the
+            Looking for Senior, Staff, or Lead roles on a team that cares
+            about the people using what it builds. Email is the fastest way to reach me. The resume has the
             rest.
           </p>
         </div>
@@ -75,8 +75,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-2">
           <p className="label-mono text-footer-foreground/40">
-            Every word here was written by a human. The site itself was built
-            with the agentic tooling it talks about.
+            Built with Claude Code, reviewed like any other PR.
           </p>
           <p className="label-mono text-footer-foreground/40">
             © {year} {site.name} · {site.location}

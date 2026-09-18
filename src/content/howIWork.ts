@@ -1,7 +1,7 @@
 // The "How I work" section: solving the user's problem first, agentic tooling as the how.
 
 export const workStatement =
-  "Agentic tools level the playing field. Products still live or die on how well the people behind them understand the problem they're trying to solve."
+  "I use AI tools every day. This is how I keep them pointed at the right problem."
 
 export interface WorkPrinciple {
   title: string
@@ -10,19 +10,20 @@ export interface WorkPrinciple {
 
 export const workPrinciples: WorkPrinciple[] = [
   {
-    title: "Put yourself in the user's shoes",
+    title: "Start with the person using it",
     body: "It's easy to paste story requirements into Claude, scroll on your phone, and glance over a multi-thousand-line PR before merging. The hard part is pausing to ask whether the feature solves the user's problem in the way that makes the most sense to them. That takes curiosity, and no tool is going to be curious for you.",
   },
   {
-    title: "Let AI do the boring parts",
-    body: "I'm a huge advocate for using AI at what it was designed for: understanding protocols, following established patterns, and grinding through repetitive tasks. At Lowe's I championed agentic workflows and taught them to the team, and vulnerability resolution time dropped measurably.",
+    title: "Hand the repetitive work to AI",
+    body: "I'm a huge advocate for using AI at what it was designed for: understanding protocols, following established patterns, and grinding through repetitive tasks. At Lowe's I learned agentic workflows and Snyk's MCP tooling, then taught both to the team, and our vulnerability resolution time dropped significantly.",
+    // EDIT-ME: swap "significantly" for the real before/after if you have it.
   },
   {
-    title: "Spend the savings on polish",
+    title: "Put the saved time into polish",
     body: "Agentic tools should buy us time to dive deeper into user journeys and put a level of polish on features that wasn't reasonably attainable before. I care more about delighting users than winning arguments about the 'perfect' architecture (though I promise I can hold my own in those too).",
   },
   {
-    title: "Review like a human wrote it",
-    body: "Generated code gets the same scrutiny as anything else: PR review, tests, security scanning, performance checks. Technical knowledge and experience still matter, and the absence of either comes back to bite you fast. I review it the same whether a person wrote it or a model did.",
+    title: "Review generated code like any other code",
+    body: "Generated code gets the same scrutiny as anything else: PR review, tests, security scanning, performance checks. Technical knowledge and experience still matter, and the absence of either comes back to bite you fast.",
   },
 ]

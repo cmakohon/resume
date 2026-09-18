@@ -123,10 +123,13 @@ function EraBlock({ era }: { era: TimelineEra }) {
       ref={ref}
       className="relative grid grid-cols-1 gap-8 pl-10 lg:grid-cols-2 lg:gap-x-20 lg:pl-0"
     >
-      {/* Era marker on the spine. */}
+      {/* Era marker on the spine. School gets a hollow ring: it's where the
+          line starts, not a job. */}
       <span
         aria-hidden="true"
-        className="absolute left-[7px] top-2 size-[15px] -translate-x-1/2 rounded-full border-2 border-accent bg-accent lg:left-1/2"
+        className={`absolute left-[7px] top-2 size-[15px] -translate-x-1/2 rounded-full border-2 border-accent lg:left-1/2 ${
+          education ? "bg-background" : "bg-accent"
+        }`}
       />
 
       {/* Company track. */}
@@ -139,7 +142,11 @@ function EraBlock({ era }: { era: TimelineEra }) {
           viewport={{ amount: 0.6, once: theme.inView.once }}
         >
           <p className="label-mono text-primary">{era.years}</p>
-          <h3 className="text-3xl font-semibold tracking-tight">
+          <h3
+            className={`font-semibold tracking-tight ${
+              education ? "text-xl" : "text-3xl"
+            }`}
+          >
             {era.company}
           </h3>
           <p className="label-mono text-muted-foreground">{era.role}</p>
