@@ -2,9 +2,12 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, type Plugin } from 'vite'
+import { site } from './src/content/site.ts'
 import { buildFullMarkdown, buildLlmsTxt } from './src/lib/markdown.ts'
+import { buildResumePdf } from './src/lib/resume.ts'
 
 type MarkdownModule = typeof import('./src/lib/markdown.ts')
+type ResumeModule = typeof import('./src/lib/resume.ts')
 
 /** /llms.txt and /llms-full.txt, generated from src/content. */
 function llmsTxt(): Plugin {
@@ -33,9 +36,30 @@ function llmsTxt(): Plugin {
   }
 }
 
+/** The resume PDF at site.resumePdf, generated from src/content. */
+function resumePdf(): Plugin {
+  const path = site.resumePdf
+
+  return {
+    name: 'resume-pdf',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url?.split('?')[0] !== path) return next()
+        // Loaded per request so content edits show up without a restart.
+        const resume = (await server.ssrLoadModule('/src/lib/resume.ts')) as ResumeModule
+        res.setHeader('Content-Type', 'application/pdf')
+        res.end(await resume.buildResumePdf())
+      })
+    },
+    async generateBundle() {
+      this.emitFile({ type: 'asset', fileName: path.slice(1), source: await buildResumePdf() })
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), llmsTxt()],
+  plugins: [react(), tailwindcss(), llmsTxt(), resumePdf()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
