@@ -3,7 +3,7 @@
 
 export const site = {
   name: "Collin Makohon",
-  role: "Senior Software Engineer",
+  role: "Senior Fullstack Engineer",
   location: "Charlotte, NC",
   email: "cmakohon@me.com",
   github: "https://github.com/cmakohon",
@@ -24,7 +24,7 @@ export const site = {
   ],
   hero: {
     headline: "I love solving problems for people.",
-    deck: "Senior fullstack engineer, building with agentic tools every day. Consulting, banking, and now retail.",
+    deck: "Senior Fullstack Engineer, building with agentic tools every day. Consulting, banking, and now retail.",
     subline:
       "I've been writing software for nine-plus years. The tools keep changing (I do miss hunting for the perfect CSS property), but the goal hasn't: build things that make someone's day a little better.",
     /** Mono credential strip under the calls to action. Chronological. */
