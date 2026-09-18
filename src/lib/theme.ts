@@ -90,16 +90,23 @@ export function setTheme(theme: Theme, how: ThemeSwitch = { style: "instant" }) 
           x: window.innerWidth / 2,
           y: window.innerHeight / 2,
         }
+        const width = window.innerWidth
+        const height = window.innerHeight
         // Far enough to reach the farthest corner of the viewport.
-        const radius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y)
-        )
+        const radius = Math.hypot(Math.max(x, width - x), Math.max(y, height - y))
+        // In percentages of the snapshot, not px: some Chromium builds size
+        // the snapshot in device pixels, which halved px values on a 2x
+        // screen (the circle grew from the wrong spot, stopped at ~60% and
+        // then snapped). A circle's % radius is measured against the box's
+        // diagonal / sqrt(2).
+        const cx = (x / width) * 100
+        const cy = (y / height) * 100
+        const r = (radius / (Math.hypot(width, height) / Math.SQRT2)) * 100
         root.animate(
           {
             clipPath: [
-              `circle(0px at ${x}px ${y}px)`,
-              `circle(${radius}px at ${x}px ${y}px)`,
+              `circle(0% at ${cx}% ${cy}%)`,
+              `circle(${r}% at ${cx}% ${cy}%)`,
             ],
           },
           { duration, easing, pseudoElement: "::view-transition-new(root)" }

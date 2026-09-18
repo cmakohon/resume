@@ -23,6 +23,12 @@ function MoonIcon() {
   )
 }
 
+// The wipe's radius curve. Screen area grows with the square of the radius,
+// so the gentle ease-out (fine for fades) covered ~95% of a wide screen in
+// the first third and then crept into the far corner, which read as a stall.
+// This in-out curve keeps the covered area growing evenly to the end.
+const REVEAL = { duration: 0.6, easing: "cubic-bezier(0.33, 0, 0.67, 1)" }
+
 /** Sun or moon, showing the theme you'd switch to. Icons turn over on swap, and the new theme spreads out from the button. */
 export function ThemeToggle() {
   const { theme, toggle } = useTheme()
@@ -31,20 +37,21 @@ export function ThemeToggle() {
   const still = uiTheme.motionMode !== "full"
   const dark = theme === "dark"
 
-  // The new theme spreads out from the button on the site's gentle curve.
-  // Calm motion gets a plain cross-fade, and motion off just flips.
+  // The new theme spreads out from the button. Calm motion gets a plain
+  // cross-fade on the site's gentle curve, and motion off just flips.
   const onClick = (event: MouseEvent<HTMLButtonElement>) => {
-    const { duration, ease } = uiTheme.transitions.gentle
     const rect = event.currentTarget.getBoundingClientRect()
+    const origin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+
+    if (uiTheme.motionMode === "full") {
+      toggle({ style: "reveal", origin, ...REVEAL })
+      return
+    }
+    const { duration, ease } = uiTheme.transitions.gentle
     toggle({
-      style:
-        uiTheme.motionMode === "full"
-          ? "reveal"
-          : uiTheme.motionMode === "calm"
-            ? "fade"
-            : "instant",
-      origin: { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 },
-      duration: uiTheme.motionMode === "full" ? duration : duration / 2,
+      style: uiTheme.motionMode === "calm" ? "fade" : "instant",
+      origin,
+      duration: duration / 2,
       easing: `cubic-bezier(${ease.join(", ")})`,
     })
   }
