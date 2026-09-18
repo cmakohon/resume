@@ -1,6 +1,7 @@
 import { motion } from "motion/react"
 import { useRef, useState } from "react"
 import { useAmbient } from "@/components/ambient"
+import { CopyMarkdown } from "@/components/CopyMarkdown"
 import { RisingDots } from "@/components/RisingDots"
 import { SplitReveal } from "@/components/motion-ui/split-reveal"
 import { useMotionUITheme, useMotionUITransition } from "@/components/motion-ui/ui-theme"
@@ -122,6 +123,8 @@ export function Hero() {
             <a className="transition-colors hover:text-primary" href={site.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
             </a>
+            {" / "}
+            <CopyMarkdown />
           </span>
         </motion.div>
 
